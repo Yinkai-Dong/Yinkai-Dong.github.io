@@ -37,40 +37,53 @@
     <link rel="stylesheet" href="assets/css/academicons.css"/>
     
     <style>
-      button.accordion {
-      font:14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
-      cursor: pointer;
-      padding: 0px;
-      border: none;
-      text-align: left;
-      outline: none;
-      font-size: 100%;
-      transition: 0.3s;
-      background-color: #f8f8f8;
+      .profile-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-bottom: 20px;
       }
-      button.accordion.active, button.accordion:hover {
-      background-color: #f8f8f8;
-      }
-      button.accordion:after {
-      content: " [+] ";
-      font-size: 90%;
-      color:#777;
-      float: left;
-      margin-left: 1px;
+      
+      .profile-image {
+        border-radius: 50%; /* Makes the image circular */
+        width: 150px; /* Adjust the size of the circular image */
+        height: 150px;
+        margin-right: 20px; /* Adds space between the image and the text */
       }
 
+      button.accordion {
+        font:14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
+        cursor: pointer;
+        padding: 0px;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 100%;
+        transition: 0.3s;
+        background-color: #f8f8f8;
+      }
+      button.accordion.active, button.accordion:hover {
+        background-color: #f8f8f8;
+      }
+      button.accordion:after {
+        content: " [+] ";
+        font-size: 90%;
+        color:#777;
+        float: left;
+        margin-left: 1px;
+      }
       button.accordion.active:after {
-      content: " [\2212] ";
+        content: " [−] ";
       }
       div.panel {
-      padding: 0 20px;
-      margin-top: 5px;
-      display: none;
-      background-color: white;
-      font-size: 100%;
+        padding: 0 20px;
+        margin-top: 5px;
+        display: none;
+        background-color: white;
+        font-size: 100%;
       }
       div.panel.show {
-      display: block !important;
+        display: block !important;
       }
       .social-row {
         display: flex;
@@ -82,32 +95,33 @@
   <body>
     <div class="wrapper">
       <header>
-        <h1>Tyler Ransom</h1>
-        <p>Associate Professor of Economics<br>University of Oklahoma</p>
-        <p>Research Fellow<br><a href="https://www.iza.org/person/24155/tyler-ransom">Institute for the Study of Labor (IZA)</a></p>
-        <p>Fellow<br><a href="https://glabor.org/user/tyleransom/">Global Labor Organization (GLO)</a></p>
-    <h3><a href="https://tyleransom.github.io/">Home</a></h3>
-        <h3><a href="https://tyleransom.github.io/research.html">Research</a></h3>
-    <h3><a href="https://tyleransom.github.io/research/CV.pdf">CV</a></h3>  
-        <h3><a href="https://tyleransom.github.io/code.html">Code</a></h3> 
-        <h3><a href="https://tyleransom.github.io/teaching.html">Teaching</a></h3> 
-        <h3><a href="https://tyleransom.github.io/personal.html">Personal</a></h3>
-    <b>Social</b><br>
+        <div class="profile-container">
+          <!-- Profile image placed on the left -->
+          <img src="IMG_3475-Edit smallest.jpg" alt="Yinkai Dong" class="profile-image">
+          <div>
+            <h1>Yinkai Dong</h1>
+            <p>Research Fellow<br>Harvard University<br><a href="https://sladelab.seas.harvard.edu/">Slade Lab</a><br>Human-in-the-loop optimization</p>
+          </div>
+        </div>
+
+        <h3><a href="https://yinkai-dong.github.io/">Home</a></h3>
+        <h3><a href="https://yinkai-dong.github.io/research.html">Research</a></h3>
+        <h3><a href="https://yinkai-dong.github.io/research/CV.pdf">CV</a></h3>  
+        <h3><a href="https://yinkai-dong.github.io/code.html">Code</a></h3> 
+        <h3><a href="https://yinkai-dong.github.io/personal.html">Personal</a></h3>
+        <b>Social</b><br>
         <div class="social-row">
-          <a href="mailto:ransom@ou.edu" class="author-social" target="_blank"><i class="fa fa-fw fa-envelope-square"></i> Email</a><br>
-          <a href="https://scholar.google.com/citations?user=eohlTTcAAAAJ&hl=en" target="_blank"><i class="ai ai-fw ai-google-scholar-square"></i> Scholar</a><br>
-          <a href="https://orcid.org/0000-0002-6910-0363"><i class="ai ai-fw ai-orcid-square"></i> ORCID</a><br>
-          <a href="http://ideas.repec.org/f/pra541.html"><i class="ai ai-fw ai-ideas-repec-square"></i> RePEc</a><br>
-          <a href="http://github.com/tyleransom"><i class="fa fa-fw fa-github-square"></i> GitHub</a><br>
-          <a href="http://twitter.com/tyleransom" class="author-social" target="_blank"><i class="fa fa-fw fa-twitter-square"></i> Twitter</a><br>
-          <a href="http://linkedin.com/in/tyleransom" class="author-social" target="_blank"><i class="fa fa-fw fa-linkedin-square"></i> LinkedIn</a><br>
-          <br>
+          <a href="mailto:yinkai@seas.harvard.edu" class="author-social" target="_blank">
+            <i class="fa fa-fw fa-envelope-square"></i> Email
+          </a><br>
+          <a href="https://github.com/Yinkai-Dong" class="author-social" target="_blank">
+            <i class="fa fa-fw fa-github-square"></i> GitHub
+          </a><br>
         </div>
         <br>
-
-    <p><b>Contact:</b><br>Department of Economics<br>University of Oklahoma<br>322 CCD1, 308 Cate Center Drive<br>Norman, OK 73072</p>
-    <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-
+        
+        <p><b>Contact:</b><br>Phone: (+1) 857-799-0336<br>Email: yinkai@seas.harvard.edu<br>Harvard John A. Paulson school of engineering and applied sciences<br>150 Western Ave, Sci&Eng SEC 4.101<br>Allston, MA 02134</p>
+        <!-- <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p> -->
       </header>
       <section>
 
