@@ -1,2 +1,1 @@
-# yinkai-dong.github.io
-Repository for Yinkai Dong's academic research website.
+Personal website: https://rl27.github.io

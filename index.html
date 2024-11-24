@@ -1,109 +1,322 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <script src="https://use.fontawesome.com/baff6f55f5.js"></script>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Yinkai Dong by yinkai-dong</title>
+<!-- Very simple website layout by me. Feel free to copy / adapt. -->
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/github-light.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=yes">
+<!DOCTYPE html>
+<html>
+    <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
-    <!-- Add custom CSS for profile image -->
-    <style>
-      .profile-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        margin-bottom: 20px;
-      }
-      
-      .profile-image {
-        border-radius: 50%; /* Makes the image circular */
-        width: 150px; /* Adjust the size of the circular image */
-        height: 150px;
-        margin-right: 20px; /* Adds space between the image and the text */
-      }
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-      button.accordion {
-        font:14px/1.5 Lato, "Helvetica Neue", Helvetica, Arial, sans-serif;
-        cursor: pointer;
-        padding: 0px;
-        border: none;
-        text-align: left;
-        outline: none;
-        font-size: 100%;
-        transition: 0.3s;
-        background-color: #f8f8f8;
-      }
-      button.accordion.active, button.accordion:hover {
-        background-color: #f8f8f8;
-      }
-      button.accordion:after {
-        content: " [+] ";
-        font-size: 90%;
-        color:#777;
-        float: left;
-        margin-left: 1px;
-      }
-      button.accordion.active:after {
-        content: " [−] ";
-      }
-      div.panel {
-        padding: 0 20px;
-        margin-top: 5px;
-        display: none;
-        background-color: white;
-        font-size: 100%;
-      }
-      div.panel.show {
-        display: block !important;
-      }
-      .social-row {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <div class="profile-container">
-          <!-- Profile image placed on the left -->
-          <img src="IMG_3475-Edit smallest.jpg" alt="Yinkai Dong" class="profile-image">
-          <div>
-            <h1>Yinkai Dong</h1>
-            <p>Research Fellow<br>Harvard University<br><a href="https://sladelab.seas.harvard.edu/">Slade Lab</a><br>Supervisor: <a href="https://seas.harvard.edu/person/patrick-slade">Patrick Slade</a><br>Human-in-the-loop optimization</p>
-          </div>
+    <title>Raymond Liu</title>
+
+    <!-- <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700" rel="stylesheet"> -->
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" media="screen">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="assets/style.css" media="screen">
+
+    <!-- Font awesome 5 (for icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css ">
+
+    <link rel="icon" type="image/png" href="assets/img/favicon_32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="assets/img/favicon_16x16.png" sizes="16x16" />
+
+    </head>
+
+    <body>
+
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-dark justify-content-center" style="background-color:#8a2731;">
+            <a class="navbar-brand px-2" href="#">Raymond Liu</a>
+
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="w-50">
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="px-1 nav-item active"><a class="nav-link" href="#">About</a></li>
+                        <li class="px-1 nav-item"><a class="nav-link" href="https://rl27.github.io/cv">CV</a></li>
+                        <li class="px-1 nav-item"><a class="nav-link" href="https://github.com/rl27"><i class="fab fa-github" style="font-size:28px;"></i></a></li>
+                        <li class="px-1 nav-item"><a class="nav-link" href="https://www.linkedin.com/in/raymondzl"><i class="fab fa-linkedin" style="font-size:28px;"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="container">
+        <hr>
+
+        <div class="row justify-content-center">
+            <div class="col-md-3">
+                <img class="img-fluid rounded mx-auto d-block mb-2" id="profile" src="assets/img/profile4.jpg" alt="Me">
+            </div>
+		
+            <div class="col-md-8 pl-3" id="description">
+                <p>Hello! I'm a CS PhD student at Harvard (starting Fall '24), funded by the NSF GRFP. I'm interested in computer vision, human-robot interaction, and robotics. My mission is to use methods from these areas to develop tools to help people, particularly those who are disadvantaged.</p>
+                <p>I'm currently working with Prof. Patrick Slade at the Harvard Ability Lab, to develop a smartphone-based navigation assistant for people who are blind or visually impaired.</p>
+                <p>Some of my past/current projects are shown below. To see my academic record, work experience, and more, check out my <a href="https://rl27.github.io/cv">CV</a>.</p>
+                </p>
+            </div>
         </div>
 
-        <h3><a href="https://yinkai-dong.github.io/">Home</a></h3>
-        <h3><a href="https://yinkai-dong.github.io/research">Research</a></h3>
-        <h3><a href="https://yinkai-dong.github.io/CV/Yinkai_Dong_CV_2024.pdf">CV</a></h3>  
-        <h3><a href="https://yinkai-dong.github.io/code">Code</a></h3> 
-        <h3><a href="https://yinkai-dong.github.io/personal">Personal</a></h3>
-        <b>Social</b><br>
-        <div class="social-row">
-          <a href="mailto:yinkai@seas.harvard.edu" class="author-social" target="_blank">
-            <i class="fa fa-fw fa-envelope-square"></i> Email
-          </a><br>
-          <a href="https://github.com/Yinkai-Dong" class="author-social" target="_blank">
-            <i class="fa fa-fw fa-github-square"></i> GitHub
-          </a><br>
+        <hr>
+        <div class="col">
+            <h4>A Low-Cost and Accessible Navigation Tool for the Blind and Visually Impaired</h4>
         </div>
-        <br>
+        <div class="row pl-3 pr-3">
+            <div class="col-md-12" id="description">
+                <p>I am working with Prof. Patrick Slade at the <a href="https://ability.seas.harvard.edu/">Harvard Ability Lab</a> to develop a smartphone-based device to help blind and visually impaired people navigate. It is currently capable of full-body collision avoidance, turn-by-turn GPS navigation, and semantic segmentation of street scenes.</p>
+                <p>I've also had the pleasure of working with several undergrads to develop a motorized wheel that can be attached to a cane to better guide users.</p>
+                <p>Our overarching goal is to develop a system that (1) demonstrably improves mobility for blind users by tackling all major navigation challenges, and (2) is accessible to as many people as possible.</p>
+            </div>
+
+            <div class="col">
+                <img class="img-fluid mx-auto d-block" src="assets/img/augcane_figure.png" alt="Figure" style="max-width:85%;">
+            </div>
+        </div>        
+
+        <hr>
+        <div class="col">
+            <h4>Exploring Generative Models in Hyperbolic Space</h4>
+        </div>
+        <div class="row pl-3 pr-3">
+            <div class="col-md-8" id="description">
+                <p>Hyperbolic space is a generally under-explored topic, but it's particularly interesting because unlike Euclidean space, hyperbolic space expands exponentially due to having negative curvature, which makes it much more interesting to explore and far less limiting to explore.</p>
+                <p>During summer 2021 I worked with Prof. Ryan Adams to develop a system for visualizing and exploring generative models in simulated hyperbolic space. I implemented a model, projection, and a <a href="https://en.wikipedia.org/wiki/Order-5_square_tiling">square tiling system</a> for hyperbolic space in OpenGL and connected the model with a PGAN for generating correlated images based on geodesic distance.</p>
+                <p>For my undergraduate senior thesis I extended this work by implementing it in Unity with a generalized tiling system and a text-to-image model (<a href="https://arxiv.org/abs/2111.13792">LAFITE</a>). I also ran simulated experiments to gauge the effectiveness of my system for finding imagined outputs from a model.</p>
+                <p>The Unity WebGL app is playable <a href="https://play.unity.com/mg/other/build-rj5-1">here</a> (although the server for the generative model is down.)</p>
+
+                <div class="col d-flex justify-content-center mb-3">
+                    <div class="btn-group" role="group" aria-label="Project links">
+                        <a class="btn btn-outline-primary" href="https://github.com/rl27/MercatorUnity">Code</a>
+                        <a class="btn btn-outline-primary" href="assets/pdf/exploring_generative_models.pdf">Paper</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <img class="img-fluid mb-2" src="assets/img/unity1.png" alt="Generated outputs in hyperbolic space">
+                <img class="img-fluid" src="assets/img/unity2.png" alt="A (5,7) hyperbolic tiling">
+            </div>
+        </div>
+
+        <hr>
+        <div class="col">
+            <h4>Convolutional Transformers for Inertial Navigation</h4>
+        </div>
+        <div class="row pl-3 pr-3">
+            <div class="col-md-8" id="description">
+                <p>For my junior independent work at Princeton, I implemented neural network architectures that improve on existing state-of-the-art architectures on the task of inertial navigation. This task uses measurements from inertial measurement units (IMUs), which contain an accelerometer and a gyroscope, to predict an objects position. IMUs are cheap, ubiquitous, energy-efficient, and used in a wide variety of applications.</p>
+                <p>My models use a transformer encoder and incorporate convolutional layers to extract both global and local data relationships, and achieve better results than the previous best method.</p>
+
+                <div class="col d-flex justify-content-center mb-3">
+                    <div class="btn-group" role="group" aria-label="Project links">
+                        <a class="btn btn-outline-primary" href="https://github.com/rl27/ronin">Code</a>
+                        <a class="btn btn-outline-primary" href="assets/pdf/iw_report.pdf">Paper</a>
+                        <a class="btn btn-outline-primary" href="assets/img/iw_poster.pdf">Poster</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <img class="img-fluid" src="assets/img/cvit.png" alt="Ground truth and predicted trajectories from various models.">
+            </div>
+        </div>
+
+        <hr>
+        <div class="col">
+            <h4>OSCAR: Occluding Spatials, Category, And Region under discussion</h4>
+        </div>
+        <div class="row pl-3 pr-3">
+            <div class="col-md-8" id="description">
+                <p>For the final project for COS484 (Natural Language Processing) at Princeton, we reproduced a question-answering model and the ablations from <a href="https://aclanthology.org/2021.emnlp-main.390.pdf">this paper</a>. We additionally performed several of our own ablations, and tested using different models for generating question embeddings.</p>
+
+                <div class="col d-flex justify-content-center mb-3">
+                    <div class="btn-group" role="group" aria-label="Project links">
+                        <a class="btn btn-outline-primary" href="https://github.com/ind1010/Region-under-discussion-for-visual-dialog">Code</a>
+                        <a class="btn btn-outline-primary" href="assets/pdf/COS484_Report.pdf">Paper</a>
+                        <a class="btn btn-outline-primary" href="assets/img/484poster.pdf">Poster</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <img class="img-fluid" src="assets/img/qcs_rud.png" alt="The QCS+RuD model.">
+            </div>
+        </div>
+
+        <hr>
+        <div class="col">
+            <h4>Pedestrian Detection and Interpretability</h4>
+        </div>
+        <div class="row pl-3 pr-3">
+            <div class="col-md-8" id="description">
+                <p>For the final project for COS429 (Computer Vision) at Princeton, we investigated whether CNNs trained for object detections are reliant on visual cues when detecting pedestrians. We trained a Faster R-CNN on the Caltech Pedestrian Dataset, evaluated the model on different categories of pedestrian images, and improved the model by up-weighting images in poor-performing categories during training.</p>
+
+                <div class="col d-flex justify-content-center mb-3">
+                    <div class="btn-group" role="group" aria-label="Project links">
+                        <a class="btn btn-outline-primary" href="https://github.com/ind1010/pedestrian_detection_interpretability">Code</a>
+                        <a class="btn btn-outline-primary" href="assets/pdf/pedestrian_detection.pdf">Paper</a>
+                        <a class="btn btn-outline-primary" href="assets/img/429poster.png">Poster</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <img class="img-fluid" src="assets/img/caltech_pedestrian.png" alt="Pedestrians">
+                
+            </div>
+        </div>
+
+        <hr>
+        <div class="col">
+            <h4>Crowdsourcing Datasets for Optical Flow</h4>
+        </div>
+        <div class="row pl-3 pr-3">
+            <div class="col-md-8" id="description">
+                <p>During summer 2020, I joined the <a href="https://pvl.cs.princeton.edu/">Princeton Vision & Learning Lab</a> to work on a visual learning project on optical flow. I helped develop and optimize a system for collecting human-annotated images.</p>
+                <p>These annotations are used to predict the ground truth optical flow for various scenes and videos.</p>
+            </div>
+
+            <div class="col-md-4">
+                <img class="img-fluid mb-2" src="assets/img/frame_0001.png" alt="Frame 1">
+                <img class="img-fluid" src="assets/img/frame_0008.png" alt="Frame 8">
+                
+            </div>
+        </div>
+
+        <hr>
+        <div class="col">
+            <h4>Ray Tracing</h4>
+        </div>
+        <div class="row pl-3 pr-3">
+            <div class="col-md-8" id="description">
+                <p>During a summer internship at Oregon State University I created a simple ray tracer using C++. I implemented and tested methods for improving image rendering speed and making rendered images more realistic.</p>
+                <p>The top image is an output from an early version of the ray tracer that used simple methods such as antialiasing and reflection.</p>
+                <p>The bottom image is an output that used more advanced techniques, such as Monte Carlo path tracing, to create more realistic lighting.</p>
+                <p>I presented my work at the <a href="https://issuu.com/saturdayacademy/docs/2018symposium_r3">2018 ASE Symposium</a> (see p.25) at the University of Portland.</p>
+
+                <div class="col d-flex justify-content-center mb-3">
+                    <div class="btn-group" role="group" aria-label="Project links">
+                        <a class="btn btn-outline-primary" href="https://github.com/rl27/ray-tracing">Code</a>
+                        <a class="btn btn-outline-primary" href="assets/pdf/rt_poster.pdf">Poster</a>
+                        <a class="btn btn-outline-primary" href="assets/pdf/physically_based_rendering.pptx">Presentation</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <img class="img-fluid mb-2" src="assets/img/rt_spheres.png" alt="Spheres">
+                <img class="img-fluid" src="assets/img/path_tracing.png" alt="Path tracing">
+            </div>
+        </div>
+
+        <hr>
+        <div class="col">
+            <h4>Explainable Neural Networks</h4>
+        </div>
+
+        <div class="row pl-3 pr-3">
+            <div class="col-md-8" id="description">
+                <p>During summer of 2019 I worked on a project at Oregon State University on explainable neural networks. This project aimed to explain the decision-making of deep neural nets for image recognition in terms of human concepts.</p>
+                <p>The program was trained to recognize and identify images of birds and then analyzed to see whether it focused on semantically meaningful concepts, such as "Eye" or "Crown" as in the image shown here.</p>
+                <!-- <p>The paper for this project is available <a href="https://arxiv.org/abs/1812.07150">here</a>. -->
+            </div>
+
+            <div class="col-md-4">
+                <img class="img-fluid" src="assets/img/xnn.png" alt="XNN">
+            </div>
+        </div>
+
+        <hr>
+        <div class="col">
+            <h4>Dementia Diagnosis</h4>
+        </div>
+
+        <div class="row pl-3 pr-3">
+            <div class="col-md-8" id="description">
+                <p>Over the course of 2016 and early 2017 I helped develop a project that used deep convolutional neural nets to analyze MRI scans and attempt to diagnose various stages of dementia. My motivation for this project comes from my family's history of Alzheimer's.</p>
+                <p>By developing a technique that allowed the 3D MRI scans to each be split into hundreds of 2D "slices" as seen in the image, I was able to substantially improve the accuracy of the program.</p>
+                <p>This project was submitted to the 2017 Central Western Oregon Science Expo and the subsequent Intel Northwest Science Expo, where it won several awards.</p>
+
+                <div class="col d-flex justify-content-center mb-3">
+                    <div class="btn-group" role="group" aria-label="Project links">
+                        <a class="btn btn-outline-primary" href="assets/pdf/isef_poster.pdf">Poster</a>
+                    </div>
+                </div>
+            </div>
+                
+            <div class="col-md-4">
+                <img class="img-fluid" src="assets/img/mri_scan_1.png" alt="2D MRI scan">
+                <img class="img-fluid" src="assets/img/mri_scan_2.png" alt="2D MRI scan">
+                <img class="img-fluid" src="assets/img/mri_scan_3.png" alt="2D MRI scan">
+            </div>
+        </div>
+       
+        <hr>
+        <div class="col">
+            <h4>Other Websites</h4>
+        </div>
+
+        <div class="row pl-3 pr-3 mb-3">
+            <div class="col-md-8" id="description">
+                <p>Aside from this website, I've developed several other websites and concepts for websites. One example is <a href="https://airinchina.github.io/">airinchina.github.io</a>, which I created as an informative supplement for a high school project on air pollution in China.</p>
+                <p>A test website I created as a structure for my final project for Web Development (CS290) at OSU can be viewed <a href="assets/riddet">here</a>. The full version had a functional database, but the search bar on the test version still works!</p>
+            </div>
+                
+            <div class="col">
+                <a href="https://airinchina.github.io/"><img class="img-fluid" src="assets/img/airchina.png" alt="Air in China"></a>
+            </div>
+        </div>
+
+        <div class="row pl-3 pr-3 mb-3">
+            <div class="col-md-8" id="description">
+                <p>The most recent and the largest-scale website I've worked on so far is TigerTools, which I worked on alongside two of my classmates and friends, Indu Panigrahi and Adam Rebei. The website connects a simple and intuitive interface with a variety of APIs, allowing Princeton students to quickly locate on-campus amenities, such as printers, scanners, water filling stations, cafés, and vending machines.</p>
+                <p>The latest version of TigerTools is currently hosted on <a href="https://www.tigerapps.org/#direct">TigerApps</a>. It requires a Princeton account to access.</p>
+
+                <div class="col d-flex justify-content-center mb-3">
+                    <div class="btn-group" role="group" aria-label="Project links">
+                        <a class="btn btn-outline-primary" href="https://github.com/PrincetonUSG/TigerTools">Code</a>
+                    </div>
+                </div>
+            </div>
+                
+            <div class="col-md-4">
+                <img class="img-fluid mb-2" src="assets/img/tigertools.png" alt="TigerTools landing page">
+                <img class="img-fluid" src="assets/img/tigertools2.png" alt="TigerTools interface">
+            </div>
+        </div>
         
-        <p><b>Contact:</b><br>Phone: (+1) 857-799-0336<br>Email: yinkai@seas.harvard.edu<br>Harvard John A. Paulson school of engineering and applied sciences<br>150 Western Ave, Sci&Eng SEC 4.101<br>Allston, MA 02134</p>
-        <!-- <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p> -->
-      </header>
-      
-      <section>
-        <p>I am currently an Research Fellow of at the <a href="https://sladelab.seas.harvard.edu/">Harvard Slade Lab</a>, Affiliate at the <a href="https://seas.harvard.edu/">Harvard John a. paulson school of engineering and applied sciences</a>. I graduated with a Bachelor's degree in Robotics from <a href="https://www.sustech.edu.cn/">Southern University of Science and Technology</a> in July 2024.</p>
-        <p>My research interests include labor economics, the economics of education, urban economics, and machine learning applications. I have published papers in leading journals such as the <i>Journal of Labor Economics</i>, the <i>Journal of Human Resources</i>, the <i>Journal of Political Economy Microeconomics</i>, and the <i>Journal of Econometrics</i>. I am also an associate editor of the <i>Annals of Economics and Statistics</i>. I have taught courses on econometrics, data science, and economics of education at both undergraduate and graduate levels. My research and teaching has been recognized by the OU Dodge Family College of Arts & Sciences Irene Rothbaum Outstanding Assistant Professor Award, which I received in 2022. I am proficient in various coding languages such as Matlab, Stata, R, Julia, Bash, Git, and LaTeX. I also have advanced language skills in Japanese and beginner-level skills in Korean and German.
-      </section>
-    </div>
-    <script src="javascripts/scale.fix.js"></script>
-  </body>
+
+        <div class="row pl-3 pr-3">
+            <div class="col-md-8" id="description">
+                <p>Another website I've developed is named QTPod, which provides a web interface for users to listen to podcasts with advertisements automatically blocked. The advertisements are detected with speech recognition and removed.</p>
+
+                <div class="col d-flex justify-content-center mb-3">
+                    <div class="btn-group" role="group" aria-label="Project links">
+                        <a class="btn btn-outline-primary" href="https://github.com/QTPod/qtpod-site">Code</a>
+                    </div>
+                </div>
+            </div>
+                
+            <div class="col-md-4">
+                <img class="img-fluid mb-2" src="assets/img/qtpod_popular.png" alt="QTPod popular page">
+                <img class="img-fluid" src="assets/img/qtpod_single.png" alt="Podcast interface">
+            </div>
+        </div>
+
+        <hr>
+        <div class="row">
+            <img class="img-fluid mx-auto d-block" src="assets/img/footer.png" alt="Footer" style="max-width:60%;">
+        </div>
+        <hr>
+
+    </main>
+
+    </body>
+
 </html>
