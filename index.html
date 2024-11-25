@@ -93,12 +93,12 @@
                 <p>During my time as a Research Assistant at the <a href="https://www.eng.yale.edu/grablab/">Yale GRAB Lab</a> under the supervision of Prof. <a href="https://seas.yale.edu/faculty-research/faculty-directory/aaron-d-dollar">Aaron Dollar</a>, I designed and implemented the Model Q-II gripper. This advanced underactuated robotic hand is capable of multiple grasping primitives, including pinch, tripod, quadpod, and power grasps.</p>
                 <p>The gripper incorporates passive mechanisms that enable seamless transitions between grasping modes without additional actuators, significantly enhancing dexterity and manipulation capabilities. Through experimental validation, we achieved a forward manipulation range of 60.18 mm and a lateral range of 26.96 mm, while reducing the minimum graspable object diameter by 46%.</p>
                 <p>The Model Q-II demonstrated effectiveness in precision tasks, power-driven operations, and complex in-hand manipulations, showcasing its potential for versatile robotic applications. Our work has been submitted to <strong>ICRA 2025</strong>.</p>
-                <div class="col d-flex justify-content-center mb-3">
+                <!-- <div class="col d-flex justify-content-center mb-3">
                     <div class="btn-group" role="group" aria-label="Project links">
-                        <!-- <a class="btn btn-outline-primary" href="URL_to_code">Code</a> -->
+                        <a class="btn btn-outline-primary" href="URL_to_code">Code</a>
                         <a class="btn btn-outline-primary" href="Projects/Model Q-II/figure 1.jpg">Paper</a>
                         <a class="btn btn-outline-primary" href="Projects/Model Q-II/figure 1.jpg">Video</a>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
@@ -119,19 +119,25 @@
                 <p>Through this project, I conducted a comparative analysis between impedance control and operational space control, highlighting their respective advantages and limitations in various scenarios.</p>
                 <div class="col d-flex justify-content-center mb-3">
                     <div class="btn-group" role="group" aria-label="Project links">
-                        <!-- <a class="btn btn-outline-primary" href="URL_to_code">Code</a> -->
                         <a class="btn btn-outline-primary" href="Projects/Impedance Control/Yinkai_Report_Investigating_Joint__and_Task_Space_Impedance_Controllers_using_Baxter_Robot.pdf">Report</a>
-                        <!-- <a class="btn btn-outline-primary" href="URL_to_video">Video</a> -->
+                        <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#videoCollapse" aria-expanded="false" aria-controls="videoCollapse">
+                            Video
+                        </button>
                     </div>
                 </div>
             </div>
 
-            <div class="col-md-4">
-                <video class="img-fluid mb-2" controls autoplay loop muted>
-                    <source src="Projects/Impedance Control/Impedance Baxter.mp4" type="video/mp4">
-                </video>
+            <div class="collapse col-md-4" id="videoCollapse">
+                <div class="d-flex justify-content-center mb-2">
+                    <video class="img-fluid custom-video" controls muted>
+                        <source src="Projects/Impedance Control/Impedance Baxter.mp4" type="video/mp4">
+                    </video>
+                </div>
             </div>
         </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 
         <hr>
         <div class="col">
