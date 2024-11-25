@@ -57,8 +57,9 @@
 		
             <div class="col-md-8 pl-3" id="description">
                 <p>Hello! I'm Yinkai Dong, a robotics enthusiast currently seeking a PhD position to further my research in robotics systems, including design, control, manipulation, and machine learning. My interests span human-robot interaction, exoskeletons, robotic manipulation, and assistive technologies aimed at improving the lives of disadvantaged individuals.</p> 
-                <p>Currently, I am working with Prof. Patrick Slade at the Harvard Slade Lab on optimizing hip exoskeletons to enhance mobility for those with gait impairments.</p> 
-                <p>Previously, I conducted research at Yale's GRAB Lab under Prof. Aaron Dollar, developing underactuated robotic hands for dexterous manipulation. I also participated in a special program at MIT, focusing on impedance control and machine learning applications in robotics. My work has led to several publications and granted patents in the field of robotic grasping and manipulation devices.</p> 
+                <p>Currently, I am working with Prof. <a href=“https://seas.harvard.edu/person/patrick-slade”>Patrick Slade</a> at the <a href="sladelab.seas.harvard.edu">Harvard Slade Lab</a>on optimizing hip exoskeletons to enhance mobility and reduce energy cost.</p> 
+                <p>Previously, I conducted research at <a href="https://www.eng.yale.edu/grablab/">Yale's GRAB Lab</a> under Prof. <a href="https://seas.yale.edu/faculty-research/faculty-directory/aaron-m-dollar">Aaron Dollar</a>, developing underactuated robotic hands for dexterous manipulation. I also participated in the special student program at MIT, took robotics-related courses, and joined <a href="https://newmanlab.mit.edu/">The Eric P. and Evelyn E. Newman Laboratory for Biomechanics and Human Rehabilitation</a> under the guidance of Prof. <a href="https://meche.mit.edu/people/faculty/neville@mit.edu">Neville Hogan</a>, focusing on impedance control and machine learning applications in robotics.</p>
+                <p>My work has led to several publications and granted patents in the field of robotic grasping and manipulation devices.</p> 
                 <p>Feel free to check out my CV for more details on my academic record, research projects, and technical skills.</p>                
             </p>
             </div>
@@ -66,44 +67,47 @@
 
         <hr>
         <div class="col">
-            <h4>A Low-Cost and Accessible Navigation Tool for the Blind and Visually Impaired</h4>
+            <h4>Human-in-the-loop Optimization for Hip Exoskeleton</h4>
         </div>
         <div class="row pl-3 pr-3">
             <div class="col-md-12" id="description">
-                <p>I am working with Prof. Patrick Slade at the <a href="https://ability.seas.harvard.edu/">Harvard Ability Lab</a> to develop a smartphone-based device to help blind and visually impaired people navigate. It is currently capable of full-body collision avoidance, turn-by-turn GPS navigation, and semantic segmentation of street scenes.</p>
-                <p>I've also had the pleasure of working with several undergrads to develop a motorized wheel that can be attached to a cane to better guide users.</p>
-                <p>Our overarching goal is to develop a system that (1) demonstrably improves mobility for blind users by tackling all major navigation challenges, and (2) is accessible to as many people as possible.</p>
+                <p>I am working with Prof. Patrick Slade at the <a href="https://sladelab.seas.harvard.edu/">Harvard Slade Lab</a> to develop a hip exoskeleton system to assist human movement and reduce energy costs during walking.</p>
+                <!-- <p>The exoskeleton is built using carbon fiber, machined parts, servos, and soft fabrics, providing a lightweight yet robust structure.</p> -->
+                <!-- <p>We utilize an STM32 microcontroller for real-time control and Bluetooth data transmission, allowing for seamless monitoring and adjustments.</p> -->
+                <p>I have developed a Python interface for the Delsys EMG sensor to enable real-time data streaming and processing, essential for evaluating muscle activity and performance.</p>
+                <p>By implementing human-in-the-loop optimization strategies with reinforcement learning, we aim to enhance assistive performance, reduce energy costs, and improve adaptability to various tasks.</p>
+                <p>Our overarching goal is to create an exoskeleton system that not only provides effective assistance but also adapts to individual users, ultimately enhancing mobility and quality of life.</p>
             </div>
 
-            <div class="col">
-                <img class="img-fluid mx-auto d-block" src="assets/img/augcane_figure.png" alt="Figure" style="max-width:85%;">
-            </div>
-        </div>        
+            <!-- <div class="col">
+                <img class="img-fluid mx-auto d-block" src="assets/img/hip_exoskeleton_figure.png" alt="Figure" style="max-width:85%;">
+            </div> -->
+        </div>
+    
 
         <hr>
         <div class="col">
-            <h4>Exploring Generative Models in Hyperbolic Space</h4>
+            <h4>Model Q-II: An Underactuated Hand with Enhanced Grasping Modes and Primitives for Dexterous Manipulation</h4>
         </div>
         <div class="row pl-3 pr-3">
             <div class="col-md-8" id="description">
-                <p>Hyperbolic space is a generally under-explored topic, but it's particularly interesting because unlike Euclidean space, hyperbolic space expands exponentially due to having negative curvature, which makes it much more interesting to explore and far less limiting to explore.</p>
-                <p>During summer 2021 I worked with Prof. Ryan Adams to develop a system for visualizing and exploring generative models in simulated hyperbolic space. I implemented a model, projection, and a <a href="https://en.wikipedia.org/wiki/Order-5_square_tiling">square tiling system</a> for hyperbolic space in OpenGL and connected the model with a PGAN for generating correlated images based on geodesic distance.</p>
-                <p>For my undergraduate senior thesis I extended this work by implementing it in Unity with a generalized tiling system and a text-to-image model (<a href="https://arxiv.org/abs/2111.13792">LAFITE</a>). I also ran simulated experiments to gauge the effectiveness of my system for finding imagined outputs from a model.</p>
-                <p>The Unity WebGL app is playable <a href="https://play.unity.com/mg/other/build-rj5-1">here</a> (although the server for the generative model is down.)</p>
-
+                <p>During my time as a Research Assistant at the <a href="https://www.eng.yale.edu/grablab/">Yale GRAB Lab</a> under the supervision of Prof. <a href="https://seas.yale.edu/faculty-research/faculty-directory/aaron-d-dollar">Aaron Dollar</a>, I designed and implemented the Model Q-II gripper. This advanced underactuated robotic hand is capable of multiple grasping primitives, including pinch, tripod, quadpod, and power grasps.</p>
+                <p>The gripper incorporates passive mechanisms that enable seamless transitions between grasping modes without additional actuators, significantly enhancing dexterity and manipulation capabilities. Through experimental validation, we achieved a forward manipulation range of 60.18 mm and a lateral range of 26.96 mm, while reducing the minimum graspable object diameter by 46%.</p>
+                <p>The Model Q-II demonstrated effectiveness in precision tasks, power-driven operations, and complex in-hand manipulations, showcasing its potential for versatile robotic applications. Our work has been submitted to <strong>ICRA 2025</strong>.</p>
                 <div class="col d-flex justify-content-center mb-3">
                     <div class="btn-group" role="group" aria-label="Project links">
-                        <a class="btn btn-outline-primary" href="https://github.com/yinkai-dong/MercatorUnity">Code</a>
-                        <a class="btn btn-outline-primary" href="assets/pdf/exploring_generative_models.pdf">Paper</a>
+                        <!-- <a class="btn btn-outline-primary" href="URL_to_code">Code</a> -->
+                        <a class="btn btn-outline-primary" href="Projects/Model Q-II/figure 1.jpg">Paper</a>
+                        <a class="btn btn-outline-primary" href="Projects/Model Q-II/figure 1.jpg">Video</a>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-4">
-                <img class="img-fluid mb-2" src="assets/img/unity1.png" alt="Generated outputs in hyperbolic space">
-                <img class="img-fluid" src="assets/img/unity2.png" alt="A (5,7) hyperbolic tiling">
+                <img class="img-fluid mb-2" src="Projects/Model Q-II/figure 1.jpg" alt="Model Q-II Gripper">
             </div>
         </div>
+
 
         <hr>
         <div class="col">
