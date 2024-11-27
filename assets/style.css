@@ -36,3 +36,19 @@ a {
     font-size: 18px;
 /*    padding-left: 2vw;*/
 }
+
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    background-color: #8a2731; 
+    color: white;
+    text-align: center;
+    z-index: 1000; 
+}
+
+
+body {
+    padding-bottom: 60px;
+}
