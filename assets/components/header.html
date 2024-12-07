@@ -1,0 +1,35 @@
+<!-- components/header.html -->
+<header>
+    <nav class="navbar navbar-expand-sm navbar-dark justify-content-center">
+        <a class="navbar-brand px-2" href="index.html">Yinkai Dong</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="w-50">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="px-1 nav-item" data-page="about"><a class="nav-link" href="/">About</a></li>
+                    <!-- <li class="px-1 nav-item" data-page="publications"><a class="nav-link" href="publications.html">Publications</a></li> -->
+                    <li class="px-1 nav-item" data-page="cv"><a class="nav-link" href="cv/Yinkai_Dong_CV_2024.pdf">CV</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Get current page filename
+    const currentPage = window.location.pathname.split('/').pop().replace('.html', '') || 'about';
+    
+    // Find the corresponding nav item and add active class
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(item => {
+        if (item.getAttribute('data-page') === currentPage) {
+            item.classList.add('active');
+        } else {
+            item.classList.remove('active');
+        }
+    });
+});
+</script>
