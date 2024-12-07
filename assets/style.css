@@ -37,6 +37,11 @@ a {
 /*    padding-left: 2vw;*/
 }
 
+main {
+    padding-top: 60px; 
+    padding-bottom: 60px; 
+}
+
 header {
     position: fixed;
     top: 0;
