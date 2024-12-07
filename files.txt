@@ -1,0 +1,394 @@
+File Path: .\index.html
+File Name: index.html
+File Content:
+<!-- Very simple website layout by me. Feel free to copy / adapt. -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Yinkai Dong</title>
+        <div data-include="/assets/components/head.html"></div>
+        <script src="/js/include.js"></script>
+    </head>
+
+    <body>
+
+    <div data-include="/assets/components/header.html"></div>
+
+    <main class="container">
+        <hr>
+
+        <div class="row justify-content-center">
+            <div class="col-md-3">
+                <img class="img-fluid rounded mx-auto d-block mb-2" id="profile" src="Photos/profile1.jpg" alt="Me">
+            </div>
+            <div class="col-md-8 pl-3" id="description">
+                <p>Hello! I'm Yinkai Dong. I completed my bachelor's degree with a top 10 graduate award from the Southern University of Science and Technology (SUSTech) in China. I am currently seeking a PhD position to further my research in robotics systems. My interests span human-robot interaction, exoskeletons, robotic manipulation, and assistive technologies aimed at enhancing mobility and improving the lives of disadvantaged individuals.</p>
+                <p>Currently, I am working with Prof. <a href=“https://seas.harvard.edu/person/patrick-slade”>Patrick Slade</a> at the <a href="sladelab.seas.harvard.edu">Harvard Slade Lab</a> on optimizing hip exoskeletons to enhance mobility and reduce energy cost.</p> 
+                <p>Previously, I conducted research at <a href="https://www.eng.yale.edu/grablab/">Yale's GRAB Lab</a> under Prof. <a href="https://seas.yale.edu/faculty-research/faculty-directory/aaron-m-dollar">Aaron Dollar</a>, developing underactuated robotic hands for dexterous manipulation. I also participated in the special student program at MIT, took robotics-related courses, and joined <a href="https://newmanlab.mit.edu/">The Eric P. and Evelyn E. Newman Laboratory for Biomechanics and Human Rehabilitation</a> under the guidance of Prof. <a href="https://meche.mit.edu/people/faculty/neville@mit.edu">Neville Hogan</a>, focusing on impedance control and machine learning applications in robotics.</p>
+                <p>My work has led to several publications and granted patents in the field of robotic grasping and manipulation devices.</p> 
+                <p>Feel free to check out my CV for more details on my academic record, research projects, and technical skills.</p>                
+            </p>
+            </div>
+        </div>
+
+        <hr>
+        <div class="col">
+            <h4>Human-in-the-loop Optimization for Hip Exoskeleton</h4>
+        </div>
+        <div class="row pl-3 pr-3">
+            <div class="col-md-8" id="description">
+                <p>I am working with Prof. Patrick Slade at the <a href="https://sladelab.seas.harvard.edu/">Harvard Slade Lab</a> to develop a hip exoskeleton system to assist human movement and reduce energy costs during walking.</p>
+                <!-- <p>The exoskeleton is built using carbon fiber, machined parts, servos, and soft fabrics, providing a lightweight yet robust structure.</p> -->
+                <!-- <p>We utilize an STM32 microcontroller for real-time control and Bluetooth data transmission, allowing for seamless monitoring and adjustments.</p> -->
+                <p>I have developed a Python interface for the Delsys EMG sensor to enable real-time data streaming and processing, essential for evaluating muscle activity and performance.</p>
+                <p>By implementing human-in-the-loop optimization strategies with reinforcement learning, we aim to enhance assistive performance, reduce energy costs, and improve adaptability to various tasks.</p>
+                <p>Our overarching goal is to create an exoskeleton system that not only provides effective assistance but also adapts to individual users, ultimately enhancing mobility and quality of life.</p>
+            </div>
+
+            <div class="col-md-4">
+                <img class="img-fluid mx-auto d-block" src="Projects/HILO/Exo.png" alt="Figure" style="max-width:85%;">
+            </div>
+        </div>
+    
+
+        <hr>
+        <div class="col">
+            <h4>Model Q-II: An Underactuated Hand with Enhanced Grasping Modes and Primitives for Dexterous Manipulation</h4>
+        </div>
+        <div class="row pl-3 pr-3">
+            <div class="col-md-8" id="description">
+                <p>During my time as a Research Assistant at the <a href="https://www.eng.yale.edu/grablab/">Yale GRAB Lab</a> under the supervision of Prof. <a href="https://seas.yale.edu/faculty-research/faculty-directory/aaron-d-dollar">Aaron Dollar</a>, I designed and implemented the Model Q-II gripper. This advanced underactuated robotic hand is capable of multiple grasping primitives, including pinch, tripod, quadpod, and power grasps.</p>
+                <p>The gripper incorporates passive mechanisms that enable seamless transitions between grasping modes without additional actuators, significantly enhancing dexterity and manipulation capabilities. Through experimental validation, we achieved a forward manipulation range of 60.18 mm and a lateral range of 26.96 mm, while reducing the minimum graspable object diameter by 46%.</p>
+                <p>The Model Q-II demonstrated effectiveness in precision tasks, power-driven operations, and complex in-hand manipulations, showcasing its potential for versatile robotic applications. Our work has been submitted to <strong>ICRA 2025</strong>.</p>
+                <!-- <div class="col d-flex justify-content-center mb-3">
+                    <div class="btn-group" role="group" aria-label="Project links">
+                        <a class="btn btn-outline-primary" href="URL_to_code">Code</a>
+                        <a class="btn btn-outline-primary" href="Projects/Model Q-II/figure 1.jpg">Paper</a>
+                        <a class="btn btn-outline-primary" href="Projects/Model Q-II/figure 1.jpg">Video</a>
+                    </div>
+                </div> -->
+            </div>
+
+            <div class="col-md-4">
+                <img class="img-fluid mb-2" src="Projects/Model Q-II/figure 1.jpg" alt="Model Q-II Gripper">
+            </div>
+        </div>
+
+
+        <hr>
+        <div class="col">
+            <h4>Impedance Control Implementation on MuJoCo and Baxter Robot</h4>
+        </div>
+        <div class="row pl-3 pr-3">
+            <div class="col-md-8" id="description">
+                <p>As part of my UROP at the <a href="https://newmanlab.mit.edu/">MIT Newman Lab for Biomechanics and Human Rehabilitation</a> under the supervision of Prof. <a href="https://meche.mit.edu/people/faculty/neville@mit.edu">Neville Hogan</a>, I worked on implementing impedance control strategies on both simulation and real-world robotic platforms.</p>
+                <p>I developed joint space, task space, and operational space impedance control algorithms on the MuJoCo simulator and the Baxter robot. This involved addressing challenges related to redundancy, repeatability, and singularity in robotic systems.</p>
+                <p>Through this project, I conducted a comparative analysis between impedance control and operational space control, highlighting their respective advantages and limitations in various scenarios.</p>
+                <div class="col d-flex justify-content-center mb-3">
+                    <div class="btn-group" role="group" aria-label="Project links">
+                        <!-- <a class="btn btn-outline-primary" href="URL_to_code">Code</a> -->
+                        <a class="btn btn-outline-primary" href="Projects/Impedance Control/Yinkai_Report_Investigating_Joint__and_Task_Space_Impedance_Controllers_using_Baxter_Robot.pdf">Report</a>
+                        <!-- <a class="btn btn-outline-primary" href="URL_to_video">Video</a> -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <video class="img-fluid mb-2" controls autoplay loop muted>
+                    <source src="Projects/Impedance Control/Impedance Baxter.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+
+        <hr>
+        <div class="col">
+            <h4>Identifying Unknown Inertial Parameters of Robots Using Machine Learning</h4>
+        </div>
+        <div class="row pl-3 pr-3">
+            <div class="col-md-8" id="description">
+                <p>Continuing my work at the MIT Newman Lab, I focused on identifying unknown inertial parameters in robotic systems through machine learning.</p>
+                <p>I implemented impedance control on MuJoCo and quantified the simulation-to-real-world differences. By leveraging these discrepancies, I developed an adaptive control-based machine learning model to identify unknown friction and inertia parameters.</p>
+                <p>This approach enhances the accuracy of robotic simulations and controls by accounting for unmodeled dynamics, ultimately improving the performance of robots in real-world applications.</p>
+                <!-- <div class="col d-flex justify-content-center mb-3">
+                    <div class="btn-group" role="group" aria-label="Project links">
+                        <a class="btn btn-outline-primary" href="URL_to_code">Code</a>
+                        <a class="btn btn-outline-primary" href="URL_to_paper">Paper</a>
+                        <a class="btn btn-outline-primary" href="URL_to_video">Video</a>
+                    </div>
+                </div> -->
+            </div>
+
+            <div class="col-md-4">
+                <img class="img-fluid mb-2" src="Projects/Parameter Identification/Double Pendulum.png" alt="Inertial Parameter Identification">
+            </div>
+        </div>
+
+
+
+        <hr>
+        <div class="col">
+            <h4>Underactuated Active Adaptive Parallel Robotic Hand with Linear Trajectory</h4>
+        </div>
+        <div class="row pl-3 pr-3">
+            <div class="col-md-8" id="description">
+                <p>As a research intern at Tsinghua University under Prof. Wenzeng Zhang, I designed a parallel grasping gripper using the Watt linkage mechanism to achieve an approximately linear trajectory.</p>
+                <p>This underactuated robotic hand enhances grasping performance and adaptability, allowing for precise handling of various objects. The design was selected as a candidate for the 2023 ASME Student Mechanism and Robot Design Competition.</p>
+                <p>Our work contributes to the development of more efficient and versatile robotic hands, with potential applications in industrial automation and prosthetics.</p>
+                <div class="col d-flex justify-content-center mb-3">
+                    <div class="btn-group" role="group" aria-label="Project links">
+                        <a class="btn btn-outline-primary" href="Projects/L-PASA-W Hand/project description_Yinkai_Dong_Underactuated Parallel Robotic Hand with Linear Trajectory Based on the Watt Linkage Mechanism_v3.pdf">Paper</a>
+                        <a class="btn btn-outline-primary" href="Projects/L-PASA-W Hand/Poster - Yinkai Dong - v2.png">Poster</a>
+                        <a class="btn btn-outline-primary" href="Projects/L-PASA-W Hand/SMRDC_2023_Yinkai_Dong.mp4">Video</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- <div class="row">
+                <div class="col d-flex justify-content-center mb-3">
+                    <div class="btn-group" role="group" aria-label="Project links">
+                        <a class="btn btn-outline-primary" href="Projects/L-PASA-W Hand/project description_Yinkai_Dong_Underactuated Parallel Robotic Hand with Linear Trajectory Based on the Watt Linkage Mechanism_v3.pdf">Paper</a>
+                        <a class="btn btn-outline-primary" href="Projects/L-PASA-W Hand/Poster - Yinkai Dong - v2.png">Poster</a>
+                        <a class="btn btn-outline-primary" href="Projects/L-PASA-W Hand/SMRDC_2023_Yinkai_Dong.mp4">Video</a>
+                    </div>
+                </div>
+            </div> -->
+            
+
+            <div class="col-md-4 d-flex align-items-center">
+                <img class="img-fluid mb-2" src="Projects/L-PASA-W Hand/Picture1.png" alt="Underactuated Parallel Robotic Hand">
+            </div>
+        </div>
+
+        <div class="col-md-12 d-flex justify-content-center">
+            <video class="mb-2" style="width: 80%; max-width: 800px;" controls>
+                <source src="Projects/L-PASA-W Hand/SMRDC_2023_Yinkai_Dong.mp4" type="video/mp4">
+            </video>
+        </div>
+        
+        
+
+        <hr>
+        <div class="col">
+            <h4>Multi-Mode Compound Grasping Robot Finger Driven by Linkage</h4>
+        </div>
+        <div class="row pl-3 pr-3">
+            <div class="col-md-8" id="description">
+                <p>In this project, I explored methods for combining multiple grasping modes—including parallel, coupling, and self-adaptive grasping—into a single robotic finger design driven by linkages.</p>
+                <p>The aim was to enhance the versatility of robotic hands, allowing them to perform a wider range of tasks without the need for multiple end-effectors. This work was published in <em>Applied Sciences</em>, contributing to advancements in robotic manipulation.</p>
+                <p>The design has potential applications in service robots, prosthetics, and any field requiring adaptable and efficient grasping solutions.</p>
+                <div class="col d-flex justify-content-center mb-3">
+                    <div class="btn-group" role="group" aria-label="Project links">
+                        <a class="btn btn-outline-primary" href="Projects/MCG Hand/Yinkai-Multi-Mode Compound Grasping Robot Finger Driven by Linkage.pdf">Paper</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <img class="img-fluid mb-2" src="Projects/MCG Hand/Picture1.png" alt="Multi-Mode Grasping Robot Finger">
+            </div>
+        </div>
+
+        <hr>
+        <div class="col">
+            <h4>Coupled and Self-Adaptive Prosthetic Hand</h4>
+        </div>
+        <div class="row pl-3 pr-3">
+            <div class="col-md-8" id="description">
+                <p>In collaboration with Tsinghua University, I developed a prosthetic hand that utilizes a tension mechanism to achieve human-like grasping motions.</p>
+                <p>This coupled and self-adaptive design allows the prosthetic hand to adjust to various object shapes and sizes, enhancing the user's ability to perform daily tasks naturally and efficiently.</p>
+                <p>The project was selected for the International Science and Engineering Fair (ISEF) 2020 China Delegation, recognizing its innovation and potential impact on prosthetic technology.</p>
+                <div class="col d-flex justify-content-center mb-3">
+                    <div class="btn-group" role="group" aria-label="Project links">
+                        <a class="btn btn-outline-primary" href="Projects/COSA-DOB Hand/ICARM2019-A Novel Coupled and Self-adaptive Anthropomorphic Robot Finger with a Dual-oblique-Belt Mechanism.pdf">Paper</a>
+                        <a class="btn btn-outline-primary" href="Projects/COSA-DOB Hand/COSA-Video.mov">Video</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <img class="img-fluid mb-2" src="Projects/COSA-DOB Hand/Picture1.png" alt="Coupled and Self-Adaptive Prosthetic Hand">
+            </div>
+        </div>
+
+
+        
+        
+        
+
+    </main>
+
+    <div data-include="/assets/components/footer.html"></div>  
+
+    </body>
+
+</html>
+
+==================================================
+
+File Path: .\assets\components\footer.html
+File Name: footer.html
+File Content:
+<footer class="footer text-white text-center">
+    <div class="container">
+        <span>yinkai@seas.harvard.edu | (857)-799-0336 | Research Fellow @ Harvard University</span>
+    </div>
+</footer>
+==================================================
+
+File Path: .\assets\components\head.html
+File Name: head.html
+File Content:
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" media="screen">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+<link rel="stylesheet" href="assets/css/style.css" media="screen">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link rel="icon" type="image/png" href="assets/img/favicon_32x32.png" sizes="32x32" />
+<link rel="icon" type="image/png" href="assets/img/favicon_16x16.png" sizes="16x16" />
+
+
+==================================================
+
+File Path: .\assets\components\header.html
+File Name: header.html
+File Content:
+<!-- components/header.html -->
+<header>
+    <nav class="navbar navbar-expand-sm navbar-dark justify-content-center">
+        <a class="navbar-brand px-2" href="index.html">Yinkai Dong</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="w-50">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                    <li class="px-1 nav-item" data-page="about"><a class="nav-link" href="/">About</a></li>
+                    <!-- <li class="px-1 nav-item" data-page="publications"><a class="nav-link" href="publications.html">Publications</a></li> -->
+                    <li class="px-1 nav-item" data-page="cv"><a class="nav-link" href="/cv/Yinkai_Dong_CV_2024.pdf">CV</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Get current page filename
+    const currentPage = window.location.pathname.split('/').pop().replace('.html', '') || 'about';
+    
+    // Find the corresponding nav item and add active class
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(item => {
+        if (item.getAttribute('data-page') === currentPage) {
+            item.classList.add('active');
+        } else {
+            item.classList.remove('active');
+        }
+    });
+});
+</script>
+==================================================
+
+File Path: .\assets\css\style.css
+File Name: style.css
+File Content:
+/*body {
+    font-family: 'Roboto', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    margin: 0;
+    background-color: #fff;
+}*/
+
+a {
+    text-decoration: none;
+}
+
+.navbar-brand {
+    font-size: 1.4em;
+}
+
+.nav-link {
+    font-size: 1.2em;
+}
+
+/*.navbar-nav {
+    align-items: center;
+}*/
+
+.navbar {
+    padding-bottom: 5px;
+    padding-top: 5px;
+}
+
+.container {
+    padding-left: 3vw;
+    padding-right: 3vw;
+    /*padding-top: 2vw;
+    padding-bottom: 2vw;*/
+}
+
+#description {
+    font-size: 18px;
+/*    padding-left: 2vw;*/
+}
+
+main {
+    padding-top: 60px;
+    padding-bottom: 60px;
+    flex: 1;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    background-color: #8a2731;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    background-color: #8a2731;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    height: 60px;
+    display: flex;
+    align-items: center;
+}
+
+footer .container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+
+==================================================
+
+File Path: .\js\include.js
+File Name: include.js
+File Content:
+document.addEventListener('DOMContentLoaded', function() {
+    // Load all HTML includes
+    document.querySelectorAll('[data-include]').forEach(element => {
+        const file = element.getAttribute('data-include');
+        fetch(file)
+            .then(response => response.text())
+            .then(html => {
+                element.innerHTML = html;
+            })
+            .catch(error => console.error('Error loading component:', error));
+    });
+});
+==================================================
+
