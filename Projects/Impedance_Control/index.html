@@ -59,27 +59,35 @@
             .equation-number {
                 float: right;
             }
+            figure {
+            margin: 20px 0;
+            text-align: center;
+        }
+            figure img {
+                max-width: 80%;
+                height: auto;
+                display: block;
+                margin: 0 auto;
+            }
             .figure-caption {
                 margin-top: 10px;
                 text-align: center;
                 font-style: italic;
                 font-size: 0.9em;
             }
-            .figure {
-                margin: 20px 0;
+            /* For multi-figure sets that mimic LaTeX tabular layout */
+            .subfigure-row {
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                margin-top: 20px;
             }
-            .multi-figure {
-                margin: 20px 0;
+            .subfigure-row .subfigure {
+                flex: 0 0 auto;
+                margin: 10px;
+                text-align: center;
             }
-            /* Limit the maximum width of images and center them */
-            .figure img {
-                max-width: 80%;
-                height: auto;
-                display: block;
-                margin-left: auto;
-                margin-right: auto;
-            }
-            .multi-figure .figure img {
+            .subfigure-row .subfigure img {
                 max-width: 100%;
             }
             /* Responsive adjustments */
@@ -164,361 +172,413 @@
             });
             </script>
         </header>
-
-        <main class="paper-container">
-            <div class="paper-title">
-                Investigating Joint- and Task-Space Impedance Controllers using Baxter Robot
-            </div>
-
-            <div class="authors">
-                Yinkai Dong<sup>1,2</sup>, Moses C. Nah<sup>1</sup>, Neville Hogan<sup>1</sup><br>
-                <small>
-                    <sup>1</sup>MIT<br>
+            <main>
+                <div class="paper-title">
+                    Investigating Joint- and Task-Space Impedance Controllers using Baxter Robot
+                </div>
+            
+                <div class="authors">
+                    Yinkai Dong<sup>1,2</sup>, Moses C. Nah<sup>1</sup>, Neville Hogan<sup>1</sup><br>
+                    <small>
+                    <sup>1</sup>MIT <br>
                     <sup>2</sup>Southern University of Science and Technology
-                </small>
-            </div>
-
-            <div class="abstract">
-                <strong>Abstract:</strong> This report investigates the implementation and comparative analysis of joint-space and task-space impedance controllers. These controllers are implemented and tested in MuJoCo simulation using a Baxter robot model. 
-                The effectiveness of these controllers is demonstrated with various tasks, e.g., tracking a predetermined trajectory in both joint- and task-spaces, sustaining a constant orientation of the end-effector, managing kinematic singularity and kinematic redundancy of the robot.
-                For managing kinematic singularity, a comparison with operational space control was conducted.
-            </div>
-
-            <section>
-                <h2 class="section-title">1. Introduction</h2>
+                    </small>
+                </div>
+            
+                <div class="abstract">
+                    <strong>Abstract:</strong> This report investigates the implementation and comparative analysis of joint-space and task-space impedance controllers. These controllers are implemented and tested in MuJoCo simulation using a Baxter robot model. 
+                    The effectiveness of these controllers is demonstrated with various tasks, e.g., tracking a predetermined trajectory in both joint- and task-spaces, sustaining a constant orientation of the end-effector, managing kinematic singularity and kinematic redundancy of the robot.
+                    For managing kinematic singularity, a comparison with operational space control was conducted.
+                </div>
+            
+                <h2 class="section-title" id="introduction">1. Introduction</h2>
                 <p>
-                    In this report, we use physics simulation software MuJoCo to delve deep into the application of impedance control. 
-                    This contains a systematic exploration of joint-space and task-space impedance controllers, which are the exemplary examples. For the latter one, implementation on both position and orientation of the end-effector was conducted. 
-                    With these impedance controllers, the problems of managing kinematic singularity and redundancy are discussed. For the kinematic singularity, the impedance control method was compared with operational space control.
+                In this report, we use physics simulation software MuJoCo \citep{todorov2012mujoco} to delve deep into the application of impedance control \citep{hogan1985impedance, hogan2018impedance}. 
+                This contains a systematic exploration of joint-space and task-space impedance controllers, which are the exemplary examples. For the latter one, implementation on both position and orientation of the end-effector was conducted. 
+                With these impedance controllers, the problems of managing kinematic singularity and redundancy are discussed. For the kinematic singularity, the impedance control method was compared with operational space control \citep{khatib1985real}. 
                 </p>
-            </section>
-
-            <section>
-                <h2 class="section-title">2. Impedance Control — Theory</h2>
+            
+                <h2 class="section-title">2. Impedance Control --- Theory</h2>
                 <p>
-                    In this section, we briefly discuss about the theory of impedance control.
-                    Given an n-DOF open-chain torque-actuated robotic manipulator, the dynamics is governed by the following equations of motion:
+                In this section, we briefly discuss about the theory of impedance control.
+                Given an \( n \)-DOF open-chain torque-actuated robotic manipulator, the dynamics is governed by the following equations of motion \citep{murray1994mathematical,lynch2017modern}:
                 </p>
-
+            
                 <div class="equation">
-                    \[\mathbf{M(q) \ddot{q} + C(q, \dot{q})\dot{q} + g(q) }= \boldsymbol{\tau}_{in}\]
+                    \[
+                    \mathbf{M(q) \ddot{q} + C(q, \dot{q})\dot{q} + g(q) }= \bm{\tau}_{in}
+                    \]
                     <span class="equation-number">(1)</span>
                 </div>
-
+            
                 <p>
-                    In this equation, \(\mathbf{q}\in\mathbb{R}^{n}\) is a joint displacement array;
-                    \(\mathbf{M(q)}\in\mathbb{R}^{n\times n}\) is the joint-space inertia matrix, which is a symmetric positive-definite matrix for all \(\mathbf{q}\);
-                    \(\mathbf{C(q, \dot{q})}\in\mathbb{R}^{n\times n}\) is the Coriolis/centrifugal matrix;
-                    \(\mathbf{g(q)}\in\mathbb{R}^{n}\) is the vector of gravitational forces; \(\boldsymbol{\tau}_{in}\in\mathbb{R}^n\) is the joint-torque input applied by the actuators.
-                    Throughout this report, we assume that \(\mathbf{g(q)}\) is compensated, i.e., \(\mathbf{g(q)}\) on the left-hand side of Eq. 1 can be neglected.
+                In this equation, \(\mathbf{q}\in\mathbb{R}^{n}\) is a joint displacement array;
+                \(\mathbf{M(q)}\in\mathbb{R}^{n\times n}\) is the joint-space inertia matrix, which is a symmetric positive-definite matrix for all \(\mathbf{q}\) \citep{murray1994mathematical,lynch2017modern};
+                \(\mathbf{C(q, \dot{q})}\in\mathbb{R}^{n\times n}\) is the Coriolis/centrifugal matrix; 
+                \(\mathbf{g(q)}\in\mathbb{R}^{n}\) is the vector of gravitational forces; \(\bm{\tau}_{in}\in\mathbb{R}^n\) is the joint-torque input applied by the actuators.
+                Throughout this report, we assume that \(\mathbf{g(q)}\) is compensated, i.e., \(\mathbf{g(q)}\) on the left-hand side of Eq. (1) can be neglected.
                 </p>
-
+            
                 <p>
-                    For torque-controlled robots, the goal is to determine the torque input \(\boldsymbol{\tau}_{in}\) which produces desired behavior of the robot manipulator.
-                    For impedance control, two exemplary methods for designing \(\boldsymbol{\tau}_{in}\) are the joint-space and task-space impedance controllers.
+                For torque-controlled robots, the goal is to determine the torque input \(\bm{\tau}_{in}\) which produces desired behavior of the robot manipulator. 
+                For impedance control, two exemplary methods for designing \(\bm{\tau}_{in}\) are the joint-space and task-space impedance controllers.
                 </p>
-
+            
                 <h3 class="subsection-title">2.1 Joint-space Impedance Control</h3>
                 <p>
-                    For the joint-space impedance control, \(\boldsymbol{\tau}_{in}\) is defined by:
+                For the joint-space impedance control, \(\bm{\tau}_{in}\) is defined by:
                 </p>
-
+            
                 <div class="equation">
-                    \[\boldsymbol{\tau}_{in} = \mathbf{K_q(q_0-q)+B_q(\dot{q}_0-\dot{q})}\]
+                    \[
+                    \bm{\tau}_{in} = \mathbf{K_q(q_0-q)+B_q(\dot{q}_0-\dot{q})}
+                    \]
                     <span class="equation-number">(2)</span>
                 </div>
-
+            
                 <p>
-                    In this equation, \(\mathbf{K_q}, \mathbf{B_q} \in\mathbb{R}^{n\times n}\) are joint-space stiffness and damping matrices; \(\mathbf{q}_0\in\mathbb{R}^{n}\) is the virtual joint trajectory to which the (virtual) stiffness and damping are connected.
+                In this equation, \(\mathbf{K_q}, \mathbf{B_q} \in\mathbb{R}^{n\times n}\) are joint-space stiffness and damping matrices; \(\mathbf{q}_0\in\mathbb{R}^{n}\) is the virtual joint trajectory to which the (virtual) stiffness and damping are connected.
                 </p>
-
+            
                 <p>
-                    A favorable stability property exists for this controller.
-                    If \(\mathbf{K_q}, \mathbf{B_q}\) are chosen to be constant positive-definite matrices, and for a fixed \(\mathbf{q}_0\), \(\mathbf{q}\) asymptotically converges to \(\mathbf{q}_0\).
+                A favorable stability property exists for this controller. 
+                If \(\mathbf{K_q}, \mathbf{B_q}\) are chosen to be constant positive-definite matrices, and for a fixed \(\mathbf{q}_0\), \(\mathbf{q}\) asymptotically converges to \(\mathbf{q}_0\) \citep{takegaki1981new, slotine1991applied}.
                 </p>
-
-                <h3 class="subsection-title">2.2 Task-Space Impedance Control — Position</h3>
+            
+                <h3 class="subsection-title">2.2 Task-Space Impedance Control --- Position</h3>
                 <p>
-                    For the task-space impedance control, the method can be divided into controlling the position and orientation of the end-effector. For the former one, which we refer to as "position task-space impedance control," \(\boldsymbol{\tau}_{in}\) is defined by:
+                For the task-space impedance control, the method can be divided into controlling the position and orientation of the end-effector. For the former one, which we refer to as "position task-space impedance control," \(\bm{\tau}_{in}\) is defined by:
                 </p>
-
+            
                 <div class="equation">
-                    \[\boldsymbol{\tau}_{in} = \mathbf{ J_p(q)^{T} ( K_p (p_0 - p) + B_p (\dot{p}_0 - \dot{p}) ) }\]
+                    \[
+                    \bm{\tau}_{in} = \mathbf{ J_p(q)^{T} ( K_p (p_0 - p) + B_p (\dot{p}_0 - \dot{p}) ) }
+                    \]
                     <span class="equation-number">(3)</span>
                 </div>
-
+            
                 <p>
-                    In this equation, \(\mathbf{K_p}, \mathbf{B_p}\in\mathbb{R}^{3\times 3}\) are the translational stiffness and damping matrices; \(\mathbf{p}_0\in\mathbb{R}^{3}\) is the virtual task-space trajectory to which the (virtual) stiffness and damping are connected; \(\mathbf{p}=\mathbf{p}(\mathbf{q})\in\mathbb{R}^3\) is the end-effector position of the robot at joint configuration \(\mathbf{q}\); \(\mathbf{J_p}(\mathbf{q})\in\mathbb{R}^{3\times n}\) is the linear velocity part of the Jacobian matrix.
+                In this equation, \(\mathbf{K_p}, \mathbf{B_p}\in\mathbb{R}^{3\times 3}\) are the translational stiffness and damping matrices; \(\mathbf{p}_0\in\mathbb{R}^{3}\) is the virtual task-space trajectory to which the (virtual) stiffness and damping are connected; \(\mathbf{p}=\mathbf{p}(\mathbf{q})\in\mathbb{R}^3\) is the end-effector position of the robot at joint configuration \(\mathbf{q}\); \(\mathbf{J_p}(\mathbf{q})\in\mathbb{R}^{3\times n}\) is the linear velocity part of the Jacobian matrix \citep{siciliano2008springer}.
                 </p>
-
-                <h3 class="subsection-title">2.3 Task-Space Impedance Control — Orientation</h3>
+            
                 <p>
-                    Along with the position task-space impedance control, orientation task-space impedance control makes the current end-effector's orientation converge to the desired orientation.
-                    In detail, given a fixed inertial frame \(\{0\}\), let the current and desired orientation be denoted as \({}^{0}\mathbf{R}_{c}\) and \({}^{0}\mathbf{R}_{d}\).
+                As with the joint-space impedance controller, a favorable stability property exists. 
+                For constant positive definite \(\mathbf{K_p}, \mathbf{B_p}\) matrices, and for a constant \(\mathbf{p}_0\), \(\mathbf{p}\) asymptotically converges to \(\mathbf{p}_0\) \citep{takegaki1981new}.
                 </p>
-
+            
+                <h3 class="subsection-title">2.3 Task-Space Impedance Control --- Orientation</h3>
+                <p>
+                Along with the position task-space impedance control, orientation task-space impedance control makes the current end-effector's orientation converge to the desired orientation.
+                In detail, given a fixed inertial frame \(\{0\}\), let the current and desired orientation be denoted as \({}^{0}\mathbf{R}_{c}\) and \({}^{0}\mathbf{R}_{d}\).
+                </p>
+            
                 <div class="equation">
-                    \[\boldsymbol{\tau}_{in} =\mathbf{J}_{\boldsymbol{\omega}}^{\mathbf{T}}(\mathbf{q})( k_\epsilon \theta \ {}^{0}\boldsymbol{\epsilon} - b_\epsilon \boldsymbol{\omega} )\]
+                    \[
+                    \bm{\tau}_{in} =\mathbf{J}_{\bm{\omega}}^{\mathbf{T}}(\mathbf{q})( k_\epsilon \theta \ {}^{0}\bm{\epsilon} - b_\epsilon \bm{\omega} )
+                    \]
                     <span class="equation-number">(4)</span>
                 </div>
-
+            
                 <p>
-                    In this equation, \({}^{0}\boldsymbol{\epsilon}\in\mathbb{R}^3\) and \(\theta \in [ 0, \pi)\) correspond to the elements of the axis-angle notation of \({}^{c}\mathbf{R}_{d}={}^{0}\mathbf{R}_{c}^{T} \ {}^{0}\mathbf{R}_{d}\), respectively.
+                In this equation, \({}^{0}\bm{\epsilon}\in\mathbb{R}^3\) and \(\theta \in [ 0, \pi)\) correspond to the axis-angle notation of \({}^{c}\mathbf{R}_{d}={}^{0}\mathbf{R}_{c}^{T} \ {}^{0}\mathbf{R}_{d}\); \(k_\epsilon, b_\epsilon\in\mathbb{R}\) are positive scalars for stiffness and damping; \(\bm{\omega}\in\mathbb{R}^3\) is the angular velocity of the end-effector; \(\mathbf{J}_{\bm{\omega}}(\mathbf{q})\in\mathbb{R}^{3\times n}\) is the angular velocity part of the Jacobian matrix.
                 </p>
-
+            
                 <h3 class="subsection-title">2.4 Superposition Principle of Mechanical Impedances</h3>
                 <p>
-                    Even though each of the equation of the impedance controller is a nonlinear operator, these controllers can be "linearly" superimposed. This is the "superposition principle" of mechanical impedances, which can be expressed as:
+                Even though each impedance controller equation is a nonlinear operator, these controllers can be "linearly" superimposed \citep{hogan1985impedance}. This is the "superposition principle" of mechanical impedances:
                 </p>
-
+            
                 <div class="equation">
-                    \[\boldsymbol{\tau}_{in} = \sum_{i=1}^{n}\boldsymbol{\tau}_{in,i}\]
+                    \[
+                    \bm{\tau}_{in} = \sum_{i=1}^{n}\bm{\tau}_{in,i}
+                    \]
                     <span class="equation-number">(5)</span>
                 </div>
-
-            </section>
-
-            <section>
+            
+                <p>
+                While different types of impedance controllers can be used, in this report we focus on using Eq. (2), (3), and (4) as the basic elements.
+                The superposition principle plays a crucial role to solve multiple tasks, e.g., managing kinematic redundancy and singularity.
+                </p>
+            
                 <h2 class="section-title">3. Simulation with Baxter Robot</h2>
                 <p>
-                    In this section, we show the implementation of multiple impedance controllers in simulation.
-                    For the implementation, we use MuJoCo simulator and Baxter robot model.
+                In this section, we show the implementation of multiple impedance controllers in simulation (Section 2).
+                For the implementation, we use MuJoCo simulator \citep{todorov2012mujoco} and Baxter robot model.
                 </p>
-
+            
                 <h3 class="subsection-title">3.1 Model of Baxter Robot</h3>
                 <p>
-                    The Baxter robot, developed by Rethink Robotics is a dual-arm robot. Each arm has 7-DOF (Figure 1). For each joint of the robot, (ideal) torque actuators are mounted.
-                    Since Baxter robot already contains a low-level
+                The Baxter robot, developed by Rethink Robotics is a dual-arm robot. Each arm has 7-DOF (Figure 1). For each joint of the robot, (ideal) torque actuators are mounted. 
+                Since Baxter robot already contains a low-level gravity compensation controller, gravity was set to be zero in the simulation.
                 </p>
-                <p>
-                    Since Baxter robot already contains a low-level gravity compensation controller, gravity was set to be a zero vector in the simulation.
-                </p>
-    
-                <div class="figure row justify-content-center">
-                    <div class="col-md-8">
-                        <img src="Figure/Baxter Model.png" alt="MuJoCo model of Baxter Robot" class="img-fluid">
-                        <div class="figure-caption">
-                            Figure 1: MuJoCo model of Baxter Robot.
-                        </div>
-                    </div>
-                </div>
-    
+            
+                <figure>
+                    <img src="Figure/Baxter Model.png" alt="MuJoCo model of Baxter Robot">
+                    <figcaption class="figure-caption">Figure 1: MuJoCo model of Baxter Robot.</figcaption>
+                </figure>
+            
                 <h3 class="subsection-title">3.2 Implementation of Joint-space Impedance Control</h3>
                 <p>
-                    For both arms of the Baxter robot, a joint-space impedance controller (Eq. 2) was implemented. For the virtual joint trajectory \(\mathbf{q}_0(t)\), the minimum-jerk trajectory was used:
+                For both arms of the Baxter robot, a joint-space impedance controller (Eq. (2)) was implemented. For the virtual joint trajectory \(\mathbf{q}_0(t)\), the minimum-jerk trajectory \citep{hogan1987moving,flash1987control} was used:
                 </p>
-    
+            
                 <div class="equation">
-                    \[\mathbf{q}_0(t) = 
+                    \[
+                    \mathbf{q}_0(t) = 
                     \begin{cases}
-                        \mathbf{q}_{0,i} & \text{ $t<t_0$ } \\
-                        \mathbf{q}_{0,i} + (\mathbf{q}_{0,f}-\mathbf{q}_{0,i})\left[ {10 \cdot {{\left( {\frac{t-t_0}{D}} \right)}^3} - 15 \cdot {{\left( {\frac{t-t_0}{D}} \right)}^4} + 6 \cdot {{\left( {\frac{t-t_0}{D}} \right)}^5}} \right] & \text{ $t_0 \le t < t_0+D$ } \\
-                        \mathbf{q}_{0,f} & \text{ $t_0 + D\le t$ }         
-                    \end{cases}\]
+                    \mathbf{q}_{0,i} & \text{ $t<t_0$ } \\
+                    \mathbf{q}_{0,i} + (\mathbf{q}_{0,f}-\mathbf{q}_{0,i})\left[ {10 \cdot {{\left( {\frac{t-t_0}{D}} \right)}^3} - 15 \cdot {{\left( {\frac{t-t_0}{D}} \right)}^4} + 6 \cdot {{\left( {\frac{t-t_0}{D}} \right)}^5}} \right] & t_0 \le t < t_0+D \\
+                    \mathbf{q}_{0,f} & t_0 + D\le t 
+                    \end{cases}
+                    \]
                     <span class="equation-number">(6)</span>
                 </div>
-    
-                <div class="figure row justify-content-center">
-                    <div class="col-md-8">
-                        <img src="Figure/IMP_Joint_Space.png" alt="Joint Space Trajectory" class="img-fluid">
-                        <div class="figure-caption">
-                            Figure 2: Virtual trajectory and actual trajectory of the elbow-joint with joint-space impedance control. The initial joint angle for the right hand and left hand are \(\mathbf{q}_{0, i, r}\) = [-0.314, 0.1, 1.571, 1.571, 0.393, 1.571, -1.571], \(\mathbf{q}_{0, i, l}\) = [0.314, 0.1, -1.571, 1.571, -0.393, 1.571, 1.571].
-                        </div>
-                    </div>
-                </div>
-    
-                <h3 class="subsection-title">3.3 Implementation of Task-Space Impedance Control — The Problem of Kinematic Redundancy</h3>
+            
+                <figure>
+                    <img src="Figure/IMP_Joint_Space.png" alt="Joint-Space Trajectory">
+                    <figcaption class="figure-caption">
+                        Figure 2: Virtual trajectory and actual trajectory of the elbow-joint with joint-space impedance control. The initial joint angle for the right hand and left hand are \(\mathbf{q}_{0, i, r}\) = [-0.314, 0.1, 1.571, 1.571, 0.393, 1.571, -1.571], \(\mathbf{q}_{0, i, l}\) = [0.314, 0.1, -1.571, 1.571, -0.393, 1.571, 1.571]. The final joint angle for the right hand and left hand are \(\mathbf{q}_{0, f, r}\) = [-0.105, 0.033, 0.524, 0.524, 0.131, 0.524, -0.524], \(\mathbf{q}_{0, f, l}\) = [0.105, 0.033, -0.524, 0.524, -0.131, 0.524, 0.524]. For the plot the sixth joint was chosen. \(\mathbf{K_q} = 50\mathbf{I}_7\), \(\mathbf{B_q} = 10\mathbf{I}_7\).
+                    </figcaption>
+                </figure>
+            
+                <h3 class="subsection-title">3.3 Implementation of Task-Space Impedance Control --- The Problem of Kinematic Redundancy</h3>
                 <p>
-                    For both arms of the Baxter robot, position task-space impedance controller (Eq. 3) was implemented. 
-                    For \(\mathbf{p}_0(t)\), a circular trajectory was used:
+                For both arms of the Baxter robot, position task-space impedance controller (Eq. (3)) was implemented. 
+                For \(\mathbf{p}_0(t)\), a circular trajectory was used:
                 </p>
-    
+            
                 <div class="equation">
-                    \[\mathbf{p}_0(t) =
+                    \[
+                    \mathbf{p}_0(t) =
                     \begin{bmatrix}
-                        r_x \\
-                        r_y + r_0 \cos(\omega t + \phi)\\
-                        r_z + r_0 \sin(\omega t + \phi)
-                    \end{bmatrix}\]
+                    r_x \\
+                    r_y + r_0 \cos(\omega t + \phi)\\
+                    r_z + r_0 \sin(\omega t + \phi)
+                    \end{bmatrix}
+                    \]
                     <span class="equation-number">(7)</span>
                 </div>
-
-                <div class="figure row justify-content-center">
-                    <div class="col-md-8">
-                        <img src="Figure/IMP_Task_Space_Joint_angle_without_J.png" alt="Joint Space Trajectory" class="img-fluid">
-                        <div class="figure-caption">
-                            (a) Joint-space trajectory
+            
+                <figure>
+                    <div>
+                        <img src="Figure/IMP_Task_Space_Joint_angle_without_J.png" alt="Joint-angle Trajectory" style="max-width:80%;">
+                    </div>
+                    <div>(\textbf{a})</div>
+                    <br>
+                    <div class="subfigure-row">
+                        <div class="subfigure">
+                            <img src="Figure/IMP_Task_Space_Position_without_J_l.png" alt="Left Hand Position">
+                            <div>(\textbf{b})</div>
+                        </div>
+                        <div class="subfigure">
+                            <img src="Figure/IMP_Task_Space_Position_without_J_r.png" alt="Right Hand Position">
+                            <div>(\textbf{c})</div>
                         </div>
                     </div>
-                </div>
-    
-                <div class="multi-figure d-flex flex-wrap justify-content-center">
-                    <div class="figure">
-                        <img src="Figure/IMP_Task_Space_Position_without_J_l.png" alt="Left Hand Position" class="img-fluid">
-                        <div class="figure-caption">
-                            (b) Cartesian position of the left hand
-                        </div>
-                    </div>
-                    <div class="figure">
-                        <img src="Figure/IMP_Task_Space_Position_without_J_r.png" alt="Right Hand Position" class="img-fluid">
-                        <div class="figure-caption">
-                            (c) Cartesian position of the right hand
-                        </div>
-                    </div>
-                </div>
-    
+                    <figcaption class="figure-caption">
+                        Figure 3: (\textbf{a}) Joint-space trajectory of one of the Baxter robot arms using position task-space impedance control. 
+                        (\textbf{b}) Cartesian position of the left hand, (\textbf{c}) Cartesian position of the right hand. \(\mathbf{K_p} = 500\mathbf{I}_3\), \(\mathbf{B_p} = 10\mathbf{I}_3\). The parameters of the circular trajectory: \(r_x=0.75m\), \(r_y=-0.30m\), \(r_z=0.30m\), \(r_0=0.10m\), \(\omega=\pi rad/s\), \(\phi=0 rad\).
+                    </figcaption>
+                </figure>
+            
+                <p>
+                The resulting Cartesian-space trajectory of the end-effector is (almost) a circle. It is suspected that perfect tracking was not achieved due to the joint limit of the Baxter robot defined in the MuJoCo model. As shown in the joint trajectory (Figure 3 (a)), because of the kinematic redundancy (7-DOF arm for a 3D task), an undesired motion in the joint-space occurs.
+                </p>
+            
                 <h3 class="subsection-title">3.4 Managing Kinematic Redundancy with Impedance Superposition</h3>
                 <p>
-                    To manage the kinematic redundancy of the robot, a joint-space impedance controller (Eq. 2) is superimposed to the position task-space impedance controller (Eq. 3).
+                To manage the kinematic redundancy of the robot, a joint-space impedance controller (Eq. (2)) is superimposed to the position task-space impedance controller (Eq. (3)).
                 </p>
-
-                <div class="figure row justify-content-center">
-                    <div class="col-md-8">
-                        <img src="Figure/IMP_Task_Space_Joint_angle_with_J.png" alt="Joint Space with Superposition" class="img-fluid">
-                        <div class="figure-caption">
-                            (a) Joint-space trajectory with superposition
+            
+                <figure>
+                    <div>
+                        <img src="Figure/IMP_Task_Space_Joint_angle_with_J.png" alt="Joint-angle with Superposition" style="max-width:80%;">
+                    </div>
+                    <div>(\textbf{a})</div>
+                    <br>
+                    <div class="subfigure-row">
+                        <div class="subfigure">
+                            <img src="Figure/IMP_Task_Space_Position_with_J_l.png" alt="Left Hand with Superposition">
+                            <div>(\textbf{b})</div>
+                        </div>
+                        <div class="subfigure">
+                            <img src="Figure/IMP_Task_Space_Position_with_J_r.png" alt="Right Hand with Superposition">
+                            <div>(\textbf{c})</div>
                         </div>
                     </div>
-                </div>
-    
-                <div class="multi-figure d-flex flex-wrap justify-content-center">
-                    <div class="figure">
-                        <img src="Figure/IMP_Task_Space_Position_with_J_l.png" alt="Left Hand Position with Superposition" class="img-fluid">
-                        <div class="figure-caption">
-                            (b) Cartesian position of the left hand with superposition
-                        </div>
-                    </div>
-                    <div class="figure">
-                        <img src="Figure/IMP_Task_Space_Position_with_J_r.png" alt="Right Hand Position with Superposition" class="img-fluid">
-                        <div class="figure-caption">
-                            (c) Cartesian position of the right hand with superposition
-                        </div>
-                    </div>
-                </div>
-
+                    <figcaption class="figure-caption">
+                        Figure 4: (\textbf{a}) Joint-space trajectory, (\textbf{b}) Cartesian position of the left hand, and (\textbf{c}) Cartesian position of the right hand with superposed controllers. Parameters: \(\mathbf{K_q} = 5\mathbf{I}_7\), \(\mathbf{B_q} = 7\mathbf{I}_7\), \(\mathbf{K_p}=60\mathbf{I}_3\), \(\mathbf{B_p}=10\mathbf{I}_3\).
+                    </figcaption>
+                </figure>
+            
+                <p>
+                The results showed that after superimposing two impedance controllers, the angular trajectory of each joint became smoother, and the kinematic redundancy is managed. 
+                However, task conflict exists, increasing the tracking error in Cartesian space.
+                </p>
+            
                 <h3 class="subsection-title">3.5 Orientation Task-space Impedance Control</h3>
                 <p>
-                    The task of tracking a task-space trajectory while maintaining a specific orientation was implemented.
-                    Each hand of the Baxter robot is given a pre-determined orientation and virtual trajectory planned in task-space, as shown in Figure 6.
-                    The virtual trajectory of the right (respectively left) hand is a triangle (respectively square).
+                The task of tracking a task-space trajectory while maintaining a specific orientation was implemented.
+                Each hand of the Baxter robot is given a predetermined orientation and virtual trajectory in task-space, as shown in Figure 5.
+                The virtual trajectory of the right hand is a triangle, and that of the left hand is a square.
                 </p>
-
-                <div class="figure row justify-content-center">
-                    <div class="col-md-8">
-                        <img src="Figure/Baxter Orientaion.png" alt="Baxter Robot Orientation" class="img-fluid">
-                        <div class="figure-caption">
-                            Figure 6: Simulation posture of Baxter Robot and the virtual task-space trajectory of both arms.
+            
+                <figure>
+                    <img src="Figure/Baxter Orientaion.png" alt="Baxter Orientation">
+                    <figcaption class="figure-caption">Figure 5: Simulation posture of Baxter Robot and the virtual task-space trajectory of both arms.</figcaption>
+                </figure>
+            
+                <figure>
+                    <div class="subfigure-row">
+                        <div class="subfigure">
+                            <img src="Figure/Orientation Triangle.png" alt="Triangle Trajectory">
+                            <div>(\textbf{a})</div>
+                        </div>
+                        <div class="subfigure">
+                            <img src="Figure/Orientation Square.png" alt="Square Trajectory">
+                            <div>(\textbf{b})</div>
                         </div>
                     </div>
-                </div>
-
-                <div class="multi-figure d-flex flex-wrap justify-content-center">
-                    <div class="figure">
-                        <img src="Figure/Orientation Triangle.png" alt="Triangle Trajectory" class="img-fluid">
-                        <div class="figure-caption">
-                            (a) Triangle trajectory results
+                    <br>
+                    <div class="subfigure-row">
+                        <div class="subfigure">
+                            <img src="Figure/Orientation_Error_right.png" alt="Orientation Error Right">
+                            <div>(\textbf{c})</div>
+                        </div>
+                        <div class="subfigure">
+                            <img src="Figure/Orientation_Error_left.png" alt="Orientation Error Left">
+                            <div>(\textbf{d})</div>
                         </div>
                     </div>
-                    <div class="figure">
-                        <img src="Figure/Orientation Square.png" alt="Square Trajectory" class="img-fluid">
-                        <div class="figure-caption">
-                            (b) Square trajectory results
-                        </div>
-                    </div>
-                    <div class="figure">
-                        <img src="Figure/Orientation_Error_right.png" alt="Right Hand Orientation Error" class="img-fluid">
-                        <div class="figure-caption">
-                            (c) Orientation error of right hand
-                        </div>
-                    </div>
-                    <div class="figure">
-                        <img src="Figure/Orientation_Error_left.png" alt="Left Hand Orientation Error" class="img-fluid">
-                        <div class="figure-caption">
-                            (d) Orientation error of left hand
-                        </div>
-                    </div>
-                </div>
-
+                    <figcaption class="figure-caption">
+                        Figure 6: (\textbf{a}) Triangle trajectory and (\textbf{b}) Square trajectory results. (\textbf{c}) Orientation error of right hand. (\textbf{d}) Orientation error of left hand. Parameters: \(\mathbf{K_q}=200\mathbf{I}_7\), \(\mathbf{B_q}=5\mathbf{I}_7\), \(\mathbf{K_p}=5\mathbf{I}_3\), \(\mathbf{B_p}=7\mathbf{I}_3\), \(k_{\theta}=5\), \(b_{\theta}=7\).
+                    </figcaption>
+                </figure>
+            
                 <p>
-                    The results are shown in Figure 7. Deviations from the task-space trajectory are observed when the end-effector moves away from the initial points \(\mathbf{p_{0, r}}\) and \(\mathbf{p_{0, l}}\), shown in Figure 7 (a, b).
+                Deviations from the task-space trajectory are observed when the end-effector moves away from the initial points. Increasing the orientation virtual stiffness \(k_{\theta}\) decreases the orientation error.
                 </p>
-
-                <h3 class="subsection-title">3.6 Managing Kinematic Singularity — A Comparison with Operational Space Control</h3>
+            
+                <h3 class="subsection-title">3.6 Managing Kinematic Singularity --- A Comparison with Operational Space Control</h3>
                 <p>
-                    We show how the robot's behavior near kinematic singularity can be managed using impedance control.
-                    For this, a comparison of performance with Operational Space Control was conducted.
-                    For the Operational Space Control, the following controller input was used:
+                We show how the robot's behavior near kinematic singularity can be managed using impedance control. 
+                For this, a comparison with Operational Space Control (OSC) \citep{khatib1985real} was conducted.
+                For OSC, the following controller was used:
                 </p>
-
+            
                 <div class="equation">
-                    \[\boldsymbol{\tau}_{in} = \bf{J}(q)^{T} \cdot \bf{F}_{in}\]
+                    \[
+                    \bm{\tau}_{in} = \mathbf{J}(q)^{T}\mathbf{F}_{in}
+                    \]
                     <span class="equation-number">(8)</span>
                 </div>
-
-                <div class="multi-figure d-flex flex-wrap justify-content-center">
-                    <div class="figure">
-                        <img src="Figure/OSC_Task_Space_BF_Joint_Angle.png" alt="OSC Joint Angle" class="img-fluid">
-                        <div class="figure-caption">
-                            (a) OSC Joint-space trajectory
+            
+                <p>
+                When forcing the robot near kinematic singularity (trying to reach a point outside its reachable workspace), OSC becomes unstable as \(\bm{\Lambda}^{-1}\) becomes unbounded. Impedance control does not require such inversion, thus does not become unbounded.
+                </p>
+            
+                <figure>
+                    <div class="subfigure-row">
+                        <div class="subfigure">
+                            <img src="Figure/OSC_Task_Space_BF_Joint_Angle.png" alt="OSC Joint Angle">
+                            <div>(\textbf{a})</div>
+                        </div>
+                        <div class="subfigure">
+                            <img src="Figure/OSC_Task_Space_BF_Position.png" alt="OSC Position">
+                            <div>(\textbf{b})</div>
+                        </div>
+                        <div class="subfigure">
+                            <img src="Figure/OSC_Task_Space_BF_JMJT.png" alt="OSC JMJT">
+                            <div>(\textbf{c})</div>
                         </div>
                     </div>
-                    <div class="figure">
-                        <img src="Figure/OSC_Task_Space_BF_Position.png" alt="OSC Position" class="img-fluid">
-                        <div class="figure-caption">
-                            (b) OSC end-effector Cartesian trajectory
+                    <br>
+                    <figcaption class="figure-caption">
+                        Figure 7: Operational Space Control near singularity: (\textbf{a}) Joint-space trajectory, (\textbf{b}) end-effector Cartesian trajectory, and (\textbf{c}) determinant of \(\bm{\Lambda}^{-1}(q)\). For OSC: \(\mathbf{K}_o=50\mathbf{I}_7, \mathbf{B}_o=7\mathbf{I}_7\).
+                    </figcaption>
+                </figure>
+            
+                <p>
+                In contrast, superimposing impedance controllers for the same scenario does not induce instability:
+                </p>
+            
+                <figure>
+                    <div class="subfigure-row">
+                        <div class="subfigure">
+                            <img src="Figure/IMP_Task_Space_BF_Joint_Angle.png" alt="Impedance Joint Angle">
+                            <div>(\textbf{a})</div>
+                        </div>
+                        <div class="subfigure">
+                            <img src="Figure/IMP_Task_Space_BF_Position.png" alt="Impedance Position">
+                            <div>(\textbf{b})</div>
+                        </div>
+                        <div class="subfigure">
+                            <img src="Figure/IMP_Task_Space_BF_JMJT.png" alt="Impedance JMJT">
+                            <div>(\textbf{c})</div>
                         </div>
                     </div>
-                    <div class="figure">
-                        <img src="Figure/OSC_Task_Space_BF_JMJT.png" alt="OSC JMJT" class="img-fluid">
-                        <div class="figure-caption">
-                            (c) OSC determinant of \(\boldsymbol{\Lambda}^{-1}\bf(q)\)
-                        </div>
-                    </div>
-                </div>
-
+                    <br>
+                    <figcaption class="figure-caption">
+                        Figure 8: Impedance control near singularity: (\textbf{a}) Joint-space trajectory, (\textbf{b}) end-effector Cartesian trajectory, (\textbf{c}) determinant of \(\bm{\Lambda}^{-1}(q)\). Parameters: \(\mathbf{K_q}=100\mathbf{I}_7, \mathbf{B_q}=7\mathbf{I}_7, \mathbf{K_p}=5\mathbf{I}_3, \mathbf{B_p}=7\mathbf{I}_3\).
+                    </figcaption>
+                </figure>
+            
                 <h3 class="subsection-title">3.7 The Problem of Repeatability</h3>
                 <p>
-                    For kinematically redundant robots, it is well known that the repeating motion in task-space produces a non-negligible drift in joint-space trajectories.
-                    In other words, given an end-effector position \(\mathbf{p}\), there exists an infinite number of solutions for \(\mathbf{q}\) which produce the same \(\mathbf{p = f(q)}\).
+                For kinematically redundant robots, repeating the same task-space motion can produce non-negligible drift in joint-space due to multiple inverse kinematic solutions. 
+                Impedance controllers can help address this repeatability problem by providing a unique joint configuration for a given task-space point.
                 </p>
-
-                <div class="multi-figure d-flex flex-wrap justify-content-center">
-                    <div class="figure">
-                        <img src="Figure/IMP_Task_Space_Joint_angle_Repeat_BK.png" alt="Joint Space Repeatability" class="img-fluid">
-                        <div class="figure-caption">
-                            (a) Joint-space trajectory repeatability
+            
+                <figure>
+                    <div class="subfigure-row">
+                        <div class="subfigure">
+                            <img src="Figure/IMP_Task_Space_Joint_angle_Repeat_BK.png" alt="Joint Angle Repeatability">
+                            <div>(\textbf{a})</div>
+                        </div>
+                        <div class="subfigure">
+                            <img src="Figure/IMP_Task_Space_Position_Repeat_BK.png" alt="Position Repeatability">
+                            <div>(\textbf{b})</div>
                         </div>
                     </div>
-                    <div class="figure">
-                        <img src="Figure/IMP_Task_Space_Position_Repeat_BK.png" alt="Position Repeatability" class="img-fluid">
-                        <div class="figure-caption">
-                            (b) End-effector Cartesian trajectory repeatability
-                        </div>
-                    </div>
-                </div>
-
-                <section>
-                    <h2 class="section-title">4. Conclusion</h2>
-                    <p>
-                        In conclusion, this study presents an in-depth exploration and comparison of various impedance controllers: joint-space impedance control and task-space impedance control.
-                        Simulations using Baxter Robot demonstrate the effectiveness of these impedance controllers for multiple tasks.
-                        For instance, we show that tracking a predetermined trajectory in both joint- and task-spaces, sustaining a constant orientation of the end-effector, and managing kinematic singularity and kinematic redundancy of the robot can be achieved with impedance controllers.
-                        Overall, the findings affirm the practicality and potential of impedance controllers in multiple robotic applications.
-                    </p>
-                </section>
-
-                <section class="references">
-                    <h2 class="section-title">References</h2>
-                    <ol>
-                        <li>Todorov, E., Erez, T., & Tassa, Y. (2012). MuJoCo: A physics engine for model-based control. In 2012 IEEE/RSJ International Conference on Intelligent Robots and Systems.</li>
-                        <li>Hogan, N. (1985). Impedance control: An approach to manipulation: Part I—Theory. Journal of dynamic systems, measurement, and control.</li>
-                        <li>Hogan, N. (2018). Impedance Control: An Approach to Manipulation: Part I—Theory. Journal of Dynamic Systems, Measurement, and Control.</li>
-                        <li>Murray, R. M., Li, Z., Sastry, S. S., & Sastry, S. S. (1994). A mathematical introduction to robotic manipulation.</li>
-                        <li>Lynch, K. M., & Park, F. C. (2017). Modern robotics.</li>
-                        <li>Khatib, O. (1985). Real-time obstacle avoidance for manipulators and mobile robots.</li>
-                    </ol>
-                </section>
-
+                    <br>
+                    <figcaption class="figure-caption">
+                        Figure 9: Impedance control repeatability. (\textbf{a}) Joint-space trajectory, (\textbf{b}) end-effector Cartesian trajectory. Parameters: \(\mathbf{K_q}=5\mathbf{I}_7\), \(\mathbf{B_q}=7\mathbf{I}_7\), \(\mathbf{K_p}=500\mathbf{I}_3\), \(\mathbf{B_p}=10\mathbf{I}_3\).
+                    </figcaption>
+                </figure>
+            
+                <h2 class="section-title">4. Conclusion</h2>
+                <p>
+                In conclusion, this study presents an in-depth exploration and comparison of various impedance controllers: joint-space impedance control and task-space impedance control.
+                Simulations using Baxter Robot demonstrate the effectiveness of these impedance controllers for multiple tasks.
+                For instance, we show that tracking a predetermined trajectory in both joint- and task-spaces, sustaining a constant orientation of the end-effector, and managing kinematic singularity and kinematic redundancy of the robot can be achieved with impedance controllers.
+                Overall, the findings affirm the practicality and potential of impedance controllers in multiple robotic applications.
+                </p>
+            
+                <h2 class="section-title">References</h2>
+                <p>
+                \bibliographystyle{SageH}<br>
+                \bibliography{literature}
+                </p>
+                <ol>
+                    <li>Todorov, E., Erez, T., & Tassa, Y. (2012). MuJoCo: A physics engine for model-based control. In 2012 IEEE/RSJ International Conference on Intelligent Robots and Systems.</li>
+                    <li>Hogan, N. (1985). Impedance control: An approach to manipulation: Part I—Theory. Journal of dynamic systems, measurement, and control.</li>
+                    <li>Hogan, N. (2018). Impedance Control: An Approach to Manipulation: Part I—Theory. Journal of Dynamic Systems, Measurement, and Control.</li>
+                    <li>Murray, R. M., Li, Z., Sastry, S. S., & Sastry, S. S. (1994). A mathematical introduction to robotic manipulation.</li>
+                    <li>Lynch, K. M., & Park, F. C. (2017). Modern robotics.</li>
+                    <li>Khatib, O. (1985). Real-time obstacle avoidance for manipulators and mobile robots.</li>
+                    <li>Takegaki, M., & Arimoto, S. (1981). A new feedback method for dynamic control of manipulators. ASME Journal of Dynamic Systems, Measurement, and Control.</li>
+                    <li>Slotine, J. J., & Li, W. (1991). Applied nonlinear control.</li>
+                    <li>Siciliano, B., & Khatib, O. (2008). Springer handbook of robotics.</li>
+                    <li>Hogan, N. (1987). Moving gracefully: Quantitative theories of motor coordination. Trends in Neurosciences.</li>
+                    <li>Flash, T., & Hogan, N. (1987). The coordination of arm movements: An experimentally confirmed mathematical model. Journal of Neuroscience.</li>
+                    <li>Hogan, N. (1985). Impedance control: An approach to manipulation: Part II—Implementation. Journal of dynamic systems, measurement, and control.</li>
+                    <li>Hogan, N. (1985). Impedance control: An approach to manipulation: Part III—Applications. Journal of dynamic systems, measurement, and control.</li>
+                    <li>Klein, C. A., & Huang, C. C. (1983). Review of pseudoinverse control for use with kinematically redundant manipulators. IEEE Transactions on Systems, Man, and Cybernetics.</li>
+                    <li>Mussa-Ivaldi, F. A., & Giszter, S. F. (1991). Vector field approximation: A computational paradigm for motor control and learning. Biological cybernetics.</li>
+                    <li>Asada, H., & Slotine, J. J. (1983). Robot analysis and control.</li>
+                    <li>Hogan, N. (1985). The mechanics of multi-joint posture and movement control. Biological Cybernetics.</li>
+                </ol>
+            
             </main>
 
             <footer class="footer text-white text-center">
