@@ -53,19 +53,30 @@
         </nav>
     
         <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Get current page filename
-            const currentPage = window.location.pathname.split('/').pop().replace('.html', '') || 'about';
-            
-            // Find the corresponding nav item and add active class
-            const navItems = document.querySelectorAll('.nav-item');
-            navItems.forEach(item => {
-                if (item.getAttribute('data-page') === currentPage) {
-                    item.classList.add('active');
-                } else {
-                    item.classList.remove('active');
-                }
-            });
+        document.addEventListener('DOMContentLoaded', function () {
+            const currentPath = window.location.pathname; // Get the current path
+            const navItems = document.querySelectorAll('.nav-item'); // Select all nav items
+
+            if (currentPath === '/' || currentPath === '/index.html') {
+                // If it's the main page (root directory), set "About" as active
+                navItems.forEach(item => {
+                    if (item.getAttribute('data-page') === 'about') {
+                        item.classList.add('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
+            } else {
+                // For subpages, get the first directory in the URL path
+                const firstLevel = currentPath.split('/')[1]; // Get the first level of the path
+                navItems.forEach(item => {
+                    if (item.getAttribute('data-page') === firstLevel) {
+                        item.classList.add('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
+            }
         });
         </script>
     </header>
