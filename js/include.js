@@ -13,10 +13,6 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
     const profileImg = document.querySelector('#profile');
     if (profileImg) {
-        const img = new Image();
-        img.onload = function() {
-            profileImg.classList.add('loaded');
-        };
-        img.src = profileImg.src;
+        profileImg.classList.add('loaded');
     }
 });
