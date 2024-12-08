@@ -119,12 +119,30 @@
                                     <a class="dropdown-item" href="/Projects/Parameter_Identification/">Patameter Identification</a>
                                     <a class="dropdown-item" href="/Projects/MCG_Hand/">MCG Hand</a>
                                     <a class="dropdown-item" href="/Projects/L-PASA-W_Hand/">L-PASA-W Hand</a>
+    
                                 </div>
                             </li>
                         </ul>
                     </div>
                 </div>
             </nav>
+        
+            <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                // Get current page filename
+                const currentPage = window.location.pathname.split('/').pop().replace('.html', '') || 'about';
+                
+                // Find the corresponding nav item and add active class
+                const navItems = document.querySelectorAll('.nav-item');
+                navItems.forEach(item => {
+                    if (item.getAttribute('data-page') === currentPage) {
+                        item.classList.add('active');
+                    } else {
+                        item.classList.remove('active');
+                    }
+                });
+            });
+            </script>
         </header>
 
         <main class="paper-container">
