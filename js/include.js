@@ -9,3 +9,14 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => console.error('Error loading component:', error));
     });
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    const profileImg = document.querySelector('#profile');
+    if (profileImg) {
+        const img = new Image();
+        img.onload = function() {
+            profileImg.classList.add('loaded');
+        };
+        img.src = profileImg.src;
+    }
+});
