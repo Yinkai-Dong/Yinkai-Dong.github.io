@@ -1,7 +1,6 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Load all HTML includes
     document.querySelectorAll('[data-include]').forEach(element => {
-        const file = element.getAttribute('data-include');
+        const file = element.getAttribute('data-include').replace(/^\//, ''); // 移除开头的斜杠
         fetch(file)
             .then(response => response.text())
             .then(html => {
