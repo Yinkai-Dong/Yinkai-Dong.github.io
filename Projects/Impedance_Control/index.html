@@ -28,7 +28,7 @@
                 font-size: 24px;
                 font-weight: bold;
                 text-align: center;
-                margin: 20px 0;
+                margin: 60px 0;
             }
             .authors {
                 text-align: center;
@@ -59,35 +59,45 @@
             .equation-number {
                 float: right;
             }
-            .figure {
-                margin: 20px 0;
-                text-align: center;
-            }
-            .figure img {
-                max-width: 100%;
-                height: auto;
-                margin: 10px 0;
-            }
             .figure-caption {
                 margin-top: 10px;
                 text-align: center;
                 font-style: italic;
+                font-size: 0.9em;
             }
-            .multi-figure {
-                display: flex;
-                justify-content: center;
-                flex-wrap: wrap;
-                gap: 20px;
+            .figure {
                 margin: 20px 0;
             }
-            .multi-figure .figure {
-                flex: 1;
-                min-width: 300px;
+            .multi-figure {
+                margin: 20px 0;
             }
-            .references {
-                margin-top: 30px;
-                border-top: 2px solid #dee2e6;
-                padding-top: 20px;
+            /* Limit the maximum width of images and center them */
+            .figure img {
+                max-width: 80%;
+                height: auto;
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            .multi-figure .figure img {
+                max-width: 100%;
+            }
+            /* Responsive adjustments */
+            @media (min-width: 768px) {
+                .figure img {
+                    max-width: 70%;
+                }
+                .multi-figure .figure {
+                    flex: 0 0 48%;
+                }
+            }
+            @media (min-width: 992px) {
+                .figure img {
+                    max-width: 60%;
+                }
+                .multi-figure .figure {
+                    flex: 0 0 30%;
+                }
             }
         </style>
     </head>
@@ -116,10 +126,9 @@
                                     <a class="dropdown-item" href="/Projects/Model_Q-II/">Model Q-II</a>
                                     <a class="dropdown-item" href="/Projects/COSA-DOB_Hand/">COSA-DOB Hand</a>
                                     <a class="dropdown-item" href="/Projects/Impedance_Control/">Impedance Control</a>
-                                    <a class="dropdown-item" href="/Projects/Parameter_Identification/">Patameter Identification</a>
+                                    <a class="dropdown-item" href="/Projects/Parameter_Identification/">Parameter Identification</a>
                                     <a class="dropdown-item" href="/Projects/MCG_Hand/">MCG Hand</a>
                                     <a class="dropdown-item" href="/Projects/L-PASA-W_Hand/">L-PASA-W Hand</a>
-    
                                 </div>
                             </li>
                         </ul>
@@ -280,137 +289,144 @@
                 <p>
                     The Baxter robot, developed by Rethink Robotics is a dual-arm robot. Each arm has 7-DOF (Figure 1). For each joint of the robot, (ideal) torque actuators are mounted.
                     Since Baxter robot already contains a low-level
-                    <p>
-                        Since Baxter robot already contains a low-level gravity compensation controller, gravity was set to be a zero vector in the simulation.
-                    </p>
+                </p>
+                <p>
+                    Since Baxter robot already contains a low-level gravity compensation controller, gravity was set to be a zero vector in the simulation.
+                </p>
     
-                    <div class="figure">
-                        <img src="Figure/Baxter Model.png" alt="MuJoCo model of Baxter Robot">
+                <div class="figure row justify-content-center">
+                    <div class="col-md-8">
+                        <img src="Figure/Baxter Model.png" alt="MuJoCo model of Baxter Robot" class="img-fluid">
                         <div class="figure-caption">
                             Figure 1: MuJoCo model of Baxter Robot.
                         </div>
                     </div>
+                </div>
     
-                    <h3 class="subsection-title">3.2 Implementation of Joint-space Impedance Control</h3>
-                    <p>
-                        For both arms of the Baxter robot, a joint-space impedance controller (Eq. 2) was implemented. For the virtual joint trajectory \(\mathbf{q}_0(t)\), the minimum-jerk trajectory was used:
-                    </p>
+                <h3 class="subsection-title">3.2 Implementation of Joint-space Impedance Control</h3>
+                <p>
+                    For both arms of the Baxter robot, a joint-space impedance controller (Eq. 2) was implemented. For the virtual joint trajectory \(\mathbf{q}_0(t)\), the minimum-jerk trajectory was used:
+                </p>
     
-                    <div class="equation">
-                        \[\mathbf{q}_0(t) = 
-                        \begin{cases}
-                            \mathbf{q}_{0,i} & \text{ $t<t_0$ } \\
-                            \mathbf{q}_{0,i} + (\mathbf{q}_{0,f}-\mathbf{q}_{0,i})\left[ {10 \cdot {{\left( {\frac{t-t_0}{D}} \right)}^3} - 15 \cdot {{\left( {\frac{t-t_0}{D}} \right)}^4} + 6 \cdot {{\left( {\frac{t-t_0}{D}} \right)}^5}} \right] & \text{ $t_0 \le t < t_0+D$ } \\
-                            \mathbf{q}_{0,f} & \text{ $t_0 + D\le t$ }         
-                        \end{cases}\]
-                        <span class="equation-number">(6)</span>
-                    </div>
+                <div class="equation">
+                    \[\mathbf{q}_0(t) = 
+                    \begin{cases}
+                        \mathbf{q}_{0,i} & \text{ $t<t_0$ } \\
+                        \mathbf{q}_{0,i} + (\mathbf{q}_{0,f}-\mathbf{q}_{0,i})\left[ {10 \cdot {{\left( {\frac{t-t_0}{D}} \right)}^3} - 15 \cdot {{\left( {\frac{t-t_0}{D}} \right)}^4} + 6 \cdot {{\left( {\frac{t-t_0}{D}} \right)}^5}} \right] & \text{ $t_0 \le t < t_0+D$ } \\
+                        \mathbf{q}_{0,f} & \text{ $t_0 + D\le t$ }         
+                    \end{cases}\]
+                    <span class="equation-number">(6)</span>
+                </div>
     
-                    <div class="figure">
-                        <img src="Figure/IMP_Joint_Space.png" alt="Joint Space Trajectory">
+                <div class="figure row justify-content-center">
+                    <div class="col-md-8">
+                        <img src="Figure/IMP_Joint_Space.png" alt="Joint Space Trajectory" class="img-fluid">
                         <div class="figure-caption">
                             Figure 2: Virtual trajectory and actual trajectory of the elbow-joint with joint-space impedance control. The initial joint angle for the right hand and left hand are \(\mathbf{q}_{0, i, r}\) = [-0.314, 0.1, 1.571, 1.571, 0.393, 1.571, -1.571], \(\mathbf{q}_{0, i, l}\) = [0.314, 0.1, -1.571, 1.571, -0.393, 1.571, 1.571].
                         </div>
                     </div>
+                </div>
     
-                    <h3 class="subsection-title">3.3 Implementation of Task-Space Impedance Control — The Problem of Kinematic Redundancy</h3>
-                    <p>
-                        For both arms of the Baxter robot, position task-space impedance controller (Eq. 3) was implemented. 
-                        For \(\mathbf{p}_0(t)\), a circular trajectory was used:
-                    </p>
+                <h3 class="subsection-title">3.3 Implementation of Task-Space Impedance Control — The Problem of Kinematic Redundancy</h3>
+                <p>
+                    For both arms of the Baxter robot, position task-space impedance controller (Eq. 3) was implemented. 
+                    For \(\mathbf{p}_0(t)\), a circular trajectory was used:
+                </p>
     
-                    <div class="equation">
-                        \[\mathbf{p}_0(t) =
-                        \begin{bmatrix}
-                            r_x \\
-                            r_y + r_0 \cos(\omega t + \phi)\\
-                            r_z + r_0 \sin(\omega t + \phi)
-                        \end{bmatrix}\]
-                        <span class="equation-number">(7)</span>
-                    </div>
+                <div class="equation">
+                    \[\mathbf{p}_0(t) =
+                    \begin{bmatrix}
+                        r_x \\
+                        r_y + r_0 \cos(\omega t + \phi)\\
+                        r_z + r_0 \sin(\omega t + \phi)
+                    \end{bmatrix}\]
+                    <span class="equation-number">(7)</span>
+                </div>
     
-                    <div class="multi-figure">
-                        <div class="figure">
-                            <img src="Figure/IMP_Task_Space_Joint_angle_without_J.png" alt="Joint Space Trajectory">
-                            <div class="figure-caption">
-                                (a) Joint-space trajectory
-                            </div>
-                        </div>
-                        <div class="figure">
-                            <img src="Figure/IMP_Task_Space_Position_without_J_l.png" alt="Left Hand Position">
-                            <div class="figure-caption">
-                                (b) Cartesian position of the left hand
-                            </div>
-                        </div>
-                        <div class="figure">
-                            <img src="Figure/IMP_Task_Space_Position_without_J_r.png" alt="Right Hand Position">
-                            <div class="figure-caption">
-                                (c) Cartesian position of the right hand
-                            </div>
+                <div class="multi-figure d-flex flex-wrap justify-content-center">
+                    <div class="figure">
+                        <img src="Figure/IMP_Task_Space_Joint_angle_without_J.png" alt="Joint Space Trajectory" class="img-fluid">
+                        <div class="figure-caption">
+                            (a) Joint-space trajectory
                         </div>
                     </div>
-    
-                    <h3 class="subsection-title">3.4 Managing Kinematic Redundancy with Impedance Superposition</h3>
-                    <p>
-                        To manage the kinematic redundancy of the robot, a joint-space impedance controller (Eq. 2) is superimposed to the position task-space impedance controller (Eq. 3).
-                    </p>
-    
-                    <div class="multi-figure">
-                        <div class="figure">
-                            <img src="Figure/IMP_Task_Space_Joint_angle_with_J.png" alt="Joint Space with Superposition">
-                            <div class="figure-caption">
-                                (a) Joint-space trajectory with superposition
-                            </div>
-                        </div>
-                        <div class="figure">
-                            <img src="Figure/IMP_Task_Space_Position_with_J_l.png" alt="Left Hand Position with Superposition">
-                            <div class="figure-caption">
-                                (b) Cartesian position of the left hand with superposition
-                            </div>
-                        </div>
-                        <div class="figure">
-                            <img src="Figure/IMP_Task_Space_Position_with_J_r.png" alt="Right Hand Position with Superposition">
-                            <div class="figure-caption">
-                                (c) Cartesian position of the right hand with superposition
-                            </div>
+                    <div class="figure">
+                        <img src="Figure/IMP_Task_Space_Position_without_J_l.png" alt="Left Hand Position" class="img-fluid">
+                        <div class="figure-caption">
+                            (b) Cartesian position of the left hand
                         </div>
                     </div>
+                    <div class="figure">
+                        <img src="Figure/IMP_Task_Space_Position_without_J_r.png" alt="Right Hand Position" class="img-fluid">
+                        <div class="figure-caption">
+                            (c) Cartesian position of the right hand
+                        </div>
+                    </div>
+                </div>
+    
+                <h3 class="subsection-title">3.4 Managing Kinematic Redundancy with Impedance Superposition</h3>
+                <p>
+                    To manage the kinematic redundancy of the robot, a joint-space impedance controller (Eq. 2) is superimposed to the position task-space impedance controller (Eq. 3).
+                </p>
+    
+                <div class="multi-figure d-flex flex-wrap justify-content-center">
+                    <div class="figure">
+                        <img src="Figure/IMP_Task_Space_Joint_angle_with_J.png" alt="Joint Space with Superposition" class="img-fluid">
+                        <div class="figure-caption">
+                            (a) Joint-space trajectory with superposition
+                        </div>
+                    </div>
+                    <div class="figure">
+                        <img src="Figure/IMP_Task_Space_Position_with_J_l.png" alt="Left Hand Position with Superposition" class="img-fluid">
+                        <div class="figure-caption">
+                            (b) Cartesian position of the left hand with superposition
+                        </div>
+                    </div>
+                    <div class="figure">
+                        <img src="Figure/IMP_Task_Space_Position_with_J_r.png" alt="Right Hand Position with Superposition" class="img-fluid">
+                        <div class="figure-caption">
+                            (c) Cartesian position of the right hand with superposition
+                        </div>
+                    </div>
+                </div>
 
-                    <h3 class="subsection-title">3.5 Orientation Task-space Impedance Control</h3>
+                <h3 class="subsection-title">3.5 Orientation Task-space Impedance Control</h3>
                 <p>
                     The task of tracking a task-space trajectory while maintaining a specific orientation was implemented.
                     Each hand of the Baxter robot is given a pre-determined orientation and virtual trajectory planned in task-space, as shown in Figure 6.
                     The virtual trajectory of the right (respectively left) hand is a triangle (respectively square).
                 </p>
 
-                <div class="figure">
-                    <img src="Figure/Baxter Orientaion.png" alt="Baxter Robot Orientation">
-                    <div class="figure-caption">
-                        Figure 6: Simulation posture of Baxter Robot and the virtual task-space trajectory of both arms.
+                <div class="figure row justify-content-center">
+                    <div class="col-md-8">
+                        <img src="Figure/Baxter Orientaion.png" alt="Baxter Robot Orientation" class="img-fluid">
+                        <div class="figure-caption">
+                            Figure 6: Simulation posture of Baxter Robot and the virtual task-space trajectory of both arms.
+                        </div>
                     </div>
                 </div>
 
-                <div class="multi-figure">
+                <div class="multi-figure d-flex flex-wrap justify-content-center">
                     <div class="figure">
-                        <img src="Figure/Orientation Triangle.png" alt="Triangle Trajectory">
+                        <img src="Figure/Orientation Triangle.png" alt="Triangle Trajectory" class="img-fluid">
                         <div class="figure-caption">
                             (a) Triangle trajectory results
                         </div>
                     </div>
                     <div class="figure">
-                        <img src="Figure/Orientation Square.png" alt="Square Trajectory">
+                        <img src="Figure/Orientation Square.png" alt="Square Trajectory" class="img-fluid">
                         <div class="figure-caption">
                             (b) Square trajectory results
                         </div>
                     </div>
                     <div class="figure">
-                        <img src="Figure/Orientation_Error_right.png" alt="Right Hand Orientation Error">
+                        <img src="Figure/Orientation_Error_right.png" alt="Right Hand Orientation Error" class="img-fluid">
                         <div class="figure-caption">
                             (c) Orientation error of right hand
                         </div>
                     </div>
                     <div class="figure">
-                        <img src="Figure/Orientation_Error_left.png" alt="Left Hand Orientation Error">
+                        <img src="Figure/Orientation_Error_left.png" alt="Left Hand Orientation Error" class="img-fluid">
                         <div class="figure-caption">
                             (d) Orientation error of left hand
                         </div>
@@ -433,21 +449,21 @@
                     <span class="equation-number">(8)</span>
                 </div>
 
-                <div class="multi-figure">
+                <div class="multi-figure d-flex flex-wrap justify-content-center">
                     <div class="figure">
-                        <img src="Figure/OSC_Task_Space_BF_Joint_Angle.png" alt="OSC Joint Angle">
+                        <img src="Figure/OSC_Task_Space_BF_Joint_Angle.png" alt="OSC Joint Angle" class="img-fluid">
                         <div class="figure-caption">
                             (a) OSC Joint-space trajectory
                         </div>
                     </div>
                     <div class="figure">
-                        <img src="Figure/OSC_Task_Space_BF_Position.png" alt="OSC Position">
+                        <img src="Figure/OSC_Task_Space_BF_Position.png" alt="OSC Position" class="img-fluid">
                         <div class="figure-caption">
                             (b) OSC end-effector Cartesian trajectory
                         </div>
                     </div>
                     <div class="figure">
-                        <img src="Figure/OSC_Task_Space_BF_JMJT.png" alt="OSC JMJT">
+                        <img src="Figure/OSC_Task_Space_BF_JMJT.png" alt="OSC JMJT" class="img-fluid">
                         <div class="figure-caption">
                             (c) OSC determinant of \(\boldsymbol{\Lambda}^{-1}\bf(q)\)
                         </div>
@@ -460,15 +476,15 @@
                     In other words, given an end-effector position \(\mathbf{p}\), there exists an infinite number of solutions for \(\mathbf{q}\) which produce the same \(\mathbf{p = f(q)}\).
                 </p>
 
-                <div class="multi-figure">
+                <div class="multi-figure d-flex flex-wrap justify-content-center">
                     <div class="figure">
-                        <img src="Figure/IMP_Task_Space_Joint_angle_Repeat_BK.png" alt="Joint Space Repeatability">
+                        <img src="Figure/IMP_Task_Space_Joint_angle_Repeat_BK.png" alt="Joint Space Repeatability" class="img-fluid">
                         <div class="figure-caption">
                             (a) Joint-space trajectory repeatability
                         </div>
                     </div>
                     <div class="figure">
-                        <img src="Figure/IMP_Task_Space_Position_Repeat_BK.png" alt="Position Repeatability">
+                        <img src="Figure/IMP_Task_Space_Position_Repeat_BK.png" alt="Position Repeatability" class="img-fluid">
                         <div class="figure-caption">
                             (b) End-effector Cartesian trajectory repeatability
                         </div>
