@@ -20,9 +20,7 @@ File Content:
 
         <div class="row justify-content-center">
             <div class="col-md-3">
-                <div class="img-container">
-                    <img class="img-fluid rounded" id="profile" src="Photos/profile1.jpg" alt="Me">
-                </div>
+                <img class="img-fluid rounded mx-auto d-block mb-2" id="profile" src="/Photos/profile1.JPG" alt="Me">
             </div>
             <div class="col-md-8 pl-3" id="description">
                 <p>Hello! I'm Yinkai Dong. I completed my bachelor's degree with a top 10 graduate award from the Southern University of Science and Technology (SUSTech) in China. I am currently seeking a PhD position to further my research in robotics systems. My interests span human-robot interaction, exoskeletons, robotic manipulation, and assistive technologies aimed at enhancing mobility and improving the lives of disadvantaged individuals.</p>
@@ -249,8 +247,8 @@ File Content:
 <link rel="stylesheet" href="assets/css/style.css" media="screen">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<link rel="icon" type="../image/png" href="/assets/img/favicon_32x32.png" sizes="32x32" />
-<link rel="icon" type="../image/png" href="/assets/img/favicon_16x16.png" sizes="16x16" />
+<link rel="icon" type="/image/png" href="assets/img/favicon_32x32.png" sizes="32x32" />
+<link rel="icon" type="/image/png" href="assets/img/favicon_16x16.png" sizes="16x16" />
 
 
 ==================================================
@@ -259,15 +257,15 @@ File Path: .\assets\components\header.html
 File Name: header.html
 File Content:
 <header>
-    <nav class="navbar navbar-expand-sm navbar-dark justify-content-center" style="background-color:#002D72;">
-        <a class="navbar-brand px-2" href="index.html">Yinkai Dong</a>
-
+    <nav class="navbar navbar-expand-sm navbar-dark justify-content-center">
+        <a class="navbar-brand px-2" href="#">Yinkai Dong</a>
+        
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" 
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
-        <div class="w-50">
+        
+        <div class="w-50">  
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav ml-auto">
                     <li class="px-1 nav-item active"><a class="nav-link" href="/">About</a></li>
