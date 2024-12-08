@@ -43,7 +43,7 @@ main {
     flex: 1;
 }
 
-header {
+/* header {
     position: fixed;
     top: 0;
     background-color: #8a2731;
@@ -51,9 +51,9 @@ header {
     right: 0;
     z-index: 1000;
     height: 60px;
-    /* display: flex; */
-    /* align-items: center; */
-}
+    display: flex; */
+    /* align-items: center;
+} */
 
 footer {
     position: fixed;
