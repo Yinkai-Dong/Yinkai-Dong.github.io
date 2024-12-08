@@ -163,7 +163,7 @@
                 </p>
 
                 <div class="equation">
-                    \[\mathbf{M(q) \ddot{q} + C(q, \dot{q})\dot{q} + g(q) }= \bm{\tau}_{in}\]
+                    \[\mathbf{M(q) \ddot{q} + C(q, \dot{q})\dot{q} + g(q) }= \boldsymbol{\tau}_{in}\]
                     <span class="equation-number">(1)</span>
                 </div>
 
@@ -171,22 +171,22 @@
                     In this equation, \(\mathbf{q}\in\mathbb{R}^{n}\) is a joint displacement array;
                     \(\mathbf{M(q)}\in\mathbb{R}^{n\times n}\) is the joint-space inertia matrix, which is a symmetric positive-definite matrix for all \(\mathbf{q}\);
                     \(\mathbf{C(q, \dot{q})}\in\mathbb{R}^{n\times n}\) is the Coriolis/centrifugal matrix;
-                    \(\mathbf{g(q)}\in\mathbb{R}^{n}\) is the vector of gravitational forces; \(\bm{\tau}_{in}\in\mathbb{R}^n\) is the joint-torque input applied by the actuators.
+                    \(\mathbf{g(q)}\in\mathbb{R}^{n}\) is the vector of gravitational forces; \(\boldsymbol{\tau}_{in}\in\mathbb{R}^n\) is the joint-torque input applied by the actuators.
                     Throughout this report, we assume that \(\mathbf{g(q)}\) is compensated, i.e., \(\mathbf{g(q)}\) on the left-hand side of Eq. 1 can be neglected.
                 </p>
 
                 <p>
-                    For torque-controlled robots, the goal is to determine the torque input \(\bm{\tau}_{in}\) which produces desired behavior of the robot manipulator.
-                    For impedance control, two exemplary methods for designing \(\bm{\tau}_{in}\) are the joint-space and task-space impedance controllers.
+                    For torque-controlled robots, the goal is to determine the torque input \(\boldsymbol{\tau}_{in}\) which produces desired behavior of the robot manipulator.
+                    For impedance control, two exemplary methods for designing \(\boldsymbol{\tau}_{in}\) are the joint-space and task-space impedance controllers.
                 </p>
 
                 <h3 class="subsection-title">2.1 Joint-space Impedance Control</h3>
                 <p>
-                    For the joint-space impedance control, \(\bm{\tau}_{in}\) is defined by:
+                    For the joint-space impedance control, \(\boldsymbol{\tau}_{in}\) is defined by:
                 </p>
 
                 <div class="equation">
-                    \[\bm{\tau}_{in} = \mathbf{K_q(q_0-q)+B_q(\dot{q}_0-\dot{q})}\]
+                    \[\boldsymbol{\tau}_{in} = \mathbf{K_q(q_0-q)+B_q(\dot{q}_0-\dot{q})}\]
                     <span class="equation-number">(2)</span>
                 </div>
 
@@ -201,11 +201,11 @@
 
                 <h3 class="subsection-title">2.2 Task-Space Impedance Control — Position</h3>
                 <p>
-                    For the task-space impedance control, the method can be divided into controlling the position and orientation of the end-effector. For the former one, which we refer to as "position task-space impedance control," \(\bm{\tau}_{in}\) is defined by:
+                    For the task-space impedance control, the method can be divided into controlling the position and orientation of the end-effector. For the former one, which we refer to as "position task-space impedance control," \(\boldsymbol{\tau}_{in}\) is defined by:
                 </p>
 
                 <div class="equation">
-                    \[\bm{\tau}_{in} = \mathbf{ J_p(q)^{T} ( K_p (p_0 - p) + B_p (\dot{p}_0 - \dot{p}) ) }\]
+                    \[\boldsymbol{\tau}_{in} = \mathbf{ J_p(q)^{T} ( K_p (p_0 - p) + B_p (\dot{p}_0 - \dot{p}) ) }\]
                     <span class="equation-number">(3)</span>
                 </div>
 
@@ -220,12 +220,12 @@
                 </p>
 
                 <div class="equation">
-                    \[\bm{\tau}_{in} =\mathbf{J}_{\bm{\omega}}^{\mathbf{T}}(\mathbf{q})( k_\epsilon \theta \ {}^{0}\bm{\epsilon} - b_\epsilon \bm{\omega} )\]
+                    \[\boldsymbol{\tau}_{in} =\mathbf{J}_{\boldsymbol{\omega}}^{\mathbf{T}}(\mathbf{q})( k_\epsilon \theta \ {}^{0}\boldsymbol{\epsilon} - b_\epsilon \boldsymbol{\omega} )\]
                     <span class="equation-number">(4)</span>
                 </div>
 
                 <p>
-                    In this equation, \({}^{0}\bm{\epsilon}\in\mathbb{R}^3\) and \(\theta \in [ 0, \pi)\) correspond to the elements of the axis-angle notation of \({}^{c}\mathbf{R}_{d}={}^{0}\mathbf{R}_{c}^{T} \ {}^{0}\mathbf{R}_{d}\), respectively.
+                    In this equation, \({}^{0}\boldsymbol{\epsilon}\in\mathbb{R}^3\) and \(\theta \in [ 0, \pi)\) correspond to the elements of the axis-angle notation of \({}^{c}\mathbf{R}_{d}={}^{0}\mathbf{R}_{c}^{T} \ {}^{0}\mathbf{R}_{d}\), respectively.
                 </p>
 
                 <h3 class="subsection-title">2.4 Superposition Principle of Mechanical Impedances</h3>
@@ -234,7 +234,7 @@
                 </p>
 
                 <div class="equation">
-                    \[\bm{\tau}_{in} = \sum_{i=1}^{n}\bm{\tau}_{in,i}\]
+                    \[\boldsymbol{\tau}_{in} = \sum_{i=1}^{n}\boldsymbol{\tau}_{in,i}\]
                     <span class="equation-number">(5)</span>
                 </div>
 
@@ -400,7 +400,7 @@
                 </p>
 
                 <div class="equation">
-                    \[\bm{\tau}_{in} = \bf{J}(q)^{T} \cdot \bf{F}_{in}\]
+                    \[\boldsymbol{\tau}_{in} = \bf{J}(q)^{T} \cdot \bf{F}_{in}\]
                     <span class="equation-number">(8)</span>
                 </div>
 
@@ -420,7 +420,7 @@
                     <div class="figure">
                         <img src="Figure/OSC_Task_Space_BF_JMJT.png" alt="OSC JMJT">
                         <div class="figure-caption">
-                            (c) OSC determinant of \(\bm{\Lambda}^{-1}\bf(q)\)
+                            (c) OSC determinant of \(\boldsymbol{\Lambda}^{-1}\bf(q)\)
                         </div>
                     </div>
                 </div>
