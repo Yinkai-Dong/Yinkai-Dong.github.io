@@ -20,7 +20,7 @@
 
 
     <header>
-        <nav class="navbar navbar-expand-sm navbar-dark justify-content-center">
+        <nav class="navbar navbar-expand-sm navbar-dark justify-content-center" style="background-color:#8a2731;">
             <a class="navbar-brand px-2" href="#">Yinkai Dong</a>
         
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" 
@@ -46,24 +46,26 @@
                 </div>
             </div>
         </nav>
+    
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get current page filename
+            const currentPage = window.location.pathname.split('/').pop().replace('.html', '') || 'about';
+            
+            // Find the corresponding nav item and add active class
+            const navItems = document.querySelectorAll('.nav-item');
+            navItems.forEach(item => {
+                if (item.getAttribute('data-page') === currentPage) {
+                    item.classList.add('active');
+                } else {
+                    item.classList.remove('active');
+                }
+            });
+        });
+        </script>
     </header>
     
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Get current page filename
-        const currentPage = window.location.pathname.split('/').pop().replace('.html', '') || 'about';
-        
-        // Find the corresponding nav item and add active class
-        const navItems = document.querySelectorAll('.nav-item');
-        navItems.forEach(item => {
-            if (item.getAttribute('data-page') === currentPage) {
-                item.classList.add('active');
-            } else {
-                item.classList.remove('active');
-            }
-        });
-    });
-    </script>
+
 
 
     <main class="container">
